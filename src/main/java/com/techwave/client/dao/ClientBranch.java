@@ -32,18 +32,7 @@ public class ClientBranch extends ClientCustomer implements IClientBranch {
 	
 	@Override
 	public String validateBranchInfo(Branchdb info) {
-		String msg = "";
-		final String specialChars[] = {"#","@","$","%","&"};
-		for(String s: specialChars) {
-			if(info.getbLoc().contains(s)) msg += "Branch location should not contain special characters."; break;
-		}
-		String email[] = info.getEmail().split("@");
-		if(!(email.length==2  && email[1].contains("."))) msg += "\nEmail Format: xxx@xxxx.com";
-		String pno[] = info.getPno().split("-");
-		if(!(pno.length==2 && pno[0].length()==3 && pno[1].length()==7  
-			&& NumberUtils.isParsable(pno[0]) && NumberUtils.isParsable(pno[1])	)) msg += "\nPhone Number Format: XXX-XXXXXXX";
-		if(msg.equals("")) msg = "Valid Credentials";
-		return msg;
+		return restTemplate.postForObject(url+"validateBranchInfo", info, String.class);
 	}
 
 	@Override

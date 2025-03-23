@@ -1,8 +1,6 @@
 package com.techwave.client.model;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
+// check after updating server
 public class Vehicledb {
 	
 	private String vehicleId;
@@ -16,6 +14,8 @@ public class Vehicledb {
 	
 	private Branchdb branchId;
 	private Integer stock;
+
+	private String status;
 	
 	public String getVehicleId() {
 		return vehicleId;
@@ -73,8 +73,16 @@ public class Vehicledb {
 		this.stock = stock;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Vehicledb(String vehicleId, String manufactureName, String color, Integer seatingCapacity, Integer price, Branchdb branchId,
-			Integer stock) {
+			Integer stock, String status) {
 		super();
 		this.vehicleId = vehicleId;
 		this.manufactureName = manufactureName;
@@ -83,6 +91,7 @@ public class Vehicledb {
 		this.price = price;
 		this.branchId = branchId;
 		this.stock = stock;
+		this.status = status;
 	}
 
 	public Vehicledb() {}

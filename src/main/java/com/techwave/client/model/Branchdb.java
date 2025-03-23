@@ -5,7 +5,6 @@ public class Branchdb {
 	private Logindb branchId;
 	private String bLoc;
 	private String address;
-	private String email;
 	private String pno;
 	
 	public Logindb getbranchId() {
@@ -32,14 +31,6 @@ public class Branchdb {
 		this.address = address;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getPno() {
 		return pno;
 	}
@@ -48,12 +39,11 @@ public class Branchdb {
 		this.pno = pno;
 	}
 	
-	public Branchdb(Logindb branchId, String bLoc, String address, String email, String pno) {
+	public Branchdb(Logindb branchId, String bLoc, String address, String pno) {
 		super();
 		this.branchId = branchId;
 		this.bLoc = bLoc;
 		this.address = address;
-		this.email = email;
 		this.pno = pno;
 	}
 

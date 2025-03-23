@@ -33,11 +33,11 @@
 							<td><f:input path="address"></f:input></td>
 							<td><f:errors path="address"></f:errors></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td>Email</td>
 							<td><f:input path="email"></f:input></td>
 							<td><f:errors path="email"></f:errors></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td>Phone Number</td>
 							<td><f:input path="pno"></f:input></td>
@@ -59,7 +59,7 @@
 				<f:form modelAttribute="customerdb">
 					<Table>
 						<tr>
-						<td>Login Id</td>
+						<td>Email</td>
 						<td><f:input type="text" path="custId.userId" value="${sessionScope.logindb.userId}" readonly="true"></f:input></td>
 						<td><f:errors path="custId"></f:errors></td>
 					</tr>
@@ -78,11 +78,11 @@
 							<td><f:input path="address" value="${customerdb.address}" readonly="true"></f:input></td>
 							<td><f:errors path="address"></f:errors></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td>Email</td>
 							<td><f:input path="email" value="${customerdb.email}" readonly="true"></f:input></td>
 							<td><f:errors path="email"></f:errors></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td>Phone Number</td>
 							<td><f:input path="pno" value="${customerdb.pno}" readonly="true"></f:input></td>

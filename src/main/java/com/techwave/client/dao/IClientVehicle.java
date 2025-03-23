@@ -17,8 +17,6 @@ public interface IClientVehicle {
 	
 	String DeleteVehicle(Vehicledb v); //delete
 	
-	String validateVehicleRequest(Vehicledb newVehicle, Branchdb branchId);
-	
 	List<Vehicledb> searchVehicles(Vehicledb search, Integer price1, Integer price2);
 	
 	String requestVehicle(Vehicledb request);

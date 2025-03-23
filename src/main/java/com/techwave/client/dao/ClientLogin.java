@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.techwave.client.model.Logindb;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Service
 public class ClientLogin extends ClientVehicle implements IClientLogin {
 	
@@ -56,87 +61,28 @@ public class ClientLogin extends ClientVehicle implements IClientLogin {
 	}
 
 	@Override
+	public String verifyEmail(String loginId) {
+		Logindb L = getByLoginId(loginId);
+		restTemplate.put(url+"verify/email="+loginId, L);
+		return "Login verified.";
+	}
+
+	@Override
 	public String validateLogin(Logindb L) {
-		Logindb login=null;
-		login=getByLoginId(L.getUserId());
-		if(login==null)
-		{
-			return "Invalid";
-		}
-		else
-		{
-			if(login.getPassword().equals(L.getPassword()))
-			{
-				return login.getRole();
-			}
-			else
-			{
-				return  "Invalid";
-			}
-		}	
+		return "restTemplate";	
 	}
 	
 	public String getLoginStatus(Logindb L) {
-		Logindb login=null;
-		login=getByLoginId(L.getUserId());
-		if(login==null)
-		{
-			return "Invalid";
-		}
-		else
-		{
-			if(login.getStatus().equals("approved"))
-			{
-				return login.getStatus();
-			}
-			else
-			{
-				return  "Invalid";
-			}
-		}	
+		return "restTemplate";	
 	}
 	
 	@Override
 	public String validateUserRequest(Logindb newUser) {
-		final String specialChars[] = {"#","@","$","%","&"};
-		final String numbers[] = {"0","1","2","3","4","5","6","7","8","9"};
-		int specialCharCount = 0;
-		int numberCount = 0;
-		//user id
-		if(newUser.getUserId().length()<6) {
-			return "Error in creating your account. Contact System Administrator";
-		}
-		for(int i=0; i<specialChars.length; i++) {
-			if(newUser.getUserId().contains(specialChars[i])) {
-				return "Error in creating your account. Contact System Administrator";
-			}
-		}
-		//password
-		if(newUser.getPassword().length()<8 || newUser.getPassword().length()>20) {
-			return"Error in creating your account. Contact System Administrator";
-		}
-		
-		for(int i=0; i<specialChars.length; i++) {
-			if(newUser.getPassword().contains(specialChars[i])) {
-				specialCharCount++;
-			}
-		}
-		if(specialCharCount<1) return "Error in creating your account. Contact System Administrator";
-		
-		for(int i=0; i<numbers.length; i++) {
-			if(newUser.getPassword().contains(numbers[i])) {
-				numberCount++;
-			}
-		}
-		if(numberCount<1) return "Error in creating your account. Contact System Administrator";
-		newUser.setStatus("pending");
-		return AddLogin(newUser);	
+		return "restTemplate";	
 	}
 
 	@Override
 	public String validateUserStatus(String loginId) {
-		Logindb L = getByLoginId(loginId);
-		L.setStatus("approved");
-		return "User is approved";
+		return "restTemplate";
 	}
 }

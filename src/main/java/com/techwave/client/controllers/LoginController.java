@@ -8,11 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.techwave.client.model.Branchdb;
-import com.techwave.client.model.Customerdb;
 import com.techwave.client.model.Logindb;
 
 import com.techwave.client.dao.Client;
@@ -61,8 +60,23 @@ public class LoginController {
 		M.addAttribute("logindb", new Logindb());
 		return "login";
 	}
+
+	@RequestMapping("OnlineVehicleBookingSystem/verify")
+	public String verifyPage(@RequestParam("email") String email, Model M) {
+		M.addAttribute("email", email);
+		return "verify";
+	}
+
+	@RequestMapping("OnlineVehicleBookingSystem/verified")
+	public String verifiedPage(@RequestParam("email") String email, Model M) {
+		cLogin.verifyEmail(email);
+		M.addAttribute("email", email);
+		M.addAttribute("msg", "Your email has been verified. Please login to continue.");
+		return "verify";
+	}
 	
-	@RequestMapping("OnlineVehicleBookingSystem/Validatelogin")
+	// check after updating server
+	@RequestMapping("OnlineVehicleBookingSystem/Validatelogin") // check after updating server
 	public String ValidateLogin(@Valid @ModelAttribute("logindb") Logindb login, BindingResult bs, Model M) {
 		try {
 			if (bs.hasErrors()) {

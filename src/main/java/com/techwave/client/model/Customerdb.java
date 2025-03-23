@@ -11,7 +11,6 @@ public class Customerdb {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate dob;
 	private String address;
-	private String email;
 	private String pno;
 	private String occupation;
 
@@ -47,14 +46,6 @@ public class Customerdb {
 		this.address = address;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getPno() {
 		return pno;
 	}
@@ -71,14 +62,13 @@ public class Customerdb {
 		this.occupation = occupation;
 	}
 
-	public Customerdb(Logindb custId, String name, LocalDate dob, String address, String email,
+	public Customerdb(Logindb custId, String name, LocalDate dob, String address,
 			String pno, String occupation) {
 		super();
 		this.custId = custId;
 		this.name = name;
 		this.dob = dob;
 		this.address = address;
-		this.email = email;
 		this.pno = pno;
 		this.occupation = occupation;
 	}

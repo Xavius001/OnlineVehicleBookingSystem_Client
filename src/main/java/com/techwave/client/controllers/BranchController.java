@@ -158,7 +158,7 @@ public class BranchController {
 				return requestPage(request, M);
 			}
 			else {
-				System.out.println(request);
+				// System.out.println(request);
 				if( (request.getVehicleId().isBlank() || request.getVehicleId().isEmpty())
 						|| (request.getManufactureName().isBlank() || request.getManufactureName().isEmpty()) 
 						|| request.getPrice()==null || (request.getColor().isBlank() || request.getColor().isEmpty()) 

@@ -19,6 +19,8 @@ public interface IClientLogin {
 	String RejectLogin(Logindb L, String loginId);
 	
 	String DeleteLogin(Logindb L); //delete
+
+	String verifyEmail(String loginId);
 	
 	String validateLogin(Logindb L); //
 	
