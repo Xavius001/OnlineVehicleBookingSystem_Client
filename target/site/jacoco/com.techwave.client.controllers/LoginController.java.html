@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoginController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">client</a> &gt; <a href="index.source.html" class="el_package">com.techwave.client.controllers</a> &gt; <span class="el_source">LoginController.java</span></div><h1>LoginController.java</h1><pre class="source lang-java linenums">package com.techwave.client.controllers;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+
+import com.techwave.client.model.Logindb;
+
+import com.techwave.client.dao.Client;
+
+@Controller
+@SessionAttributes(&quot;logindb&quot;)
+<span class="fc" id="L21">public class LoginController {</span>
+	@Autowired
+	Client cLogin;
+	
+	@RequestMapping(&quot;OnlineVehicleBookingSystem&quot;)
+	public String homePage(Model M) {
+<span class="nc" id="L27">		return &quot;home&quot;;</span>
+	}
+	
+	@RequestMapping(&quot;OnlineVehicleBookingSystem/register&quot;)
+	public String registerPage(Model M) {
+<span class="nc" id="L32">		M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
+<span class="nc" id="L33">		return &quot;register&quot;;</span>
+	}
+	
+	@RequestMapping(&quot;OnlineVehicleBookingSystem/registered&quot;)
+	public String registeredPage(@Valid @ModelAttribute(&quot;logindb&quot;) Logindb creationRequest, BindingResult bs, Model M) {
+		try {
+<span class="nc bnc" id="L39" title="All 2 branches missed.">			if (bs.hasErrors()) {</span>
+<span class="nc" id="L40">				M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
+<span class="nc" id="L41">				M.addAttribute(&quot;msg&quot;, </span>
+						&quot;Error in creating your account. Contact System Administrator&quot;);
+<span class="nc" id="L43">				return &quot;register&quot;;</span>
+			}
+			else {
+<span class="nc" id="L46">				M.addAttribute(&quot;logindb&quot;,creationRequest);</span>
+<span class="nc" id="L47">				M.addAttribute(&quot;msg&quot;, cLogin.validateUserRequest(creationRequest));</span>
+<span class="nc" id="L48">				return &quot;register&quot;;</span>
+			}
+		}
+<span class="nc" id="L51">		catch (Exception E) {</span>
+<span class="nc" id="L52">			M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
+<span class="nc" id="L53">			M.addAttribute(&quot;msg&quot;, cLogin.validateUserRequest(creationRequest));</span>
+<span class="nc" id="L54">			return &quot;register&quot;;</span>
+		}
+	}
+	
+	@RequestMapping(&quot;OnlineVehicleBookingSystem/login&quot;)
+	public String loginPage(Model M) {
+<span class="nc" id="L60">		M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
+<span class="nc" id="L61">		return &quot;login&quot;;</span>
+	}
+
+	@RequestMapping(&quot;OnlineVehicleBookingSystem/verify&quot;)
+	public String verifyPage(@RequestParam(&quot;email&quot;) String email, Model M) {
+<span class="nc" id="L66">		M.addAttribute(&quot;email&quot;, email);</span>
+<span class="nc" id="L67">		return &quot;verify&quot;;</span>
+	}
+
+	@RequestMapping(&quot;OnlineVehicleBookingSystem/verified&quot;)
+	public String verifiedPage(@RequestParam(&quot;email&quot;) String email, Model M) {
+<span class="nc" id="L72">		cLogin.verifyEmail(email);</span>
+<span class="nc" id="L73">		M.addAttribute(&quot;email&quot;, email);</span>
+<span class="nc" id="L74">		M.addAttribute(&quot;msg&quot;, &quot;Your email has been verified. Please login to continue.&quot;);</span>
+<span class="nc" id="L75">		return &quot;verify&quot;;</span>
+	}
+	
+	// check after updating server
+	@RequestMapping(&quot;OnlineVehicleBookingSystem/Validatelogin&quot;) // check after updating server
+	public String ValidateLogin(@Valid @ModelAttribute(&quot;logindb&quot;) Logindb login, BindingResult bs, Model M) {
+		try {
+<span class="nc bnc" id="L82" title="All 2 branches missed.">			if (bs.hasErrors()) {</span>
+<span class="nc" id="L83">				M.addAttribute(&quot;msg&quot;,&quot;Error. Contact System Admin for further details.&quot;);</span>
+<span class="nc" id="L84">				return &quot;login&quot;;</span>
+			} 
+			else {
+<span class="nc" id="L87">				String role = cLogin.validateLogin(login);</span>
+
+<span class="nc" id="L89">				String status = cLogin.getLoginStatus(login);</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">				if(!role.equals(&quot;Invalid&quot;)) {</span>
+<span class="nc" id="L91">					login.setRole(role);</span>
+				}
+<span class="nc bnc" id="L93" title="All 2 branches missed.">				if(!status.equals(&quot;Invalid&quot;)) {</span>
+<span class="nc" id="L94">					login.setStatus(status);</span>
+				}
+				
+<span class="nc" id="L97">				M.addAttribute(&quot;logindb&quot;,login);</span>
+<span class="nc bnc" id="L98" title="All 4 branches missed.">				if (role.equals(&quot;admin&quot;) &amp;&amp; status.equals(&quot;approved&quot;)) {</span>
+<span class="nc" id="L99">					return &quot;redirect:/OnlineVehicleBookingSystem/AdminHomepage&quot;;</span>
+				} 
+				
+<span class="nc bnc" id="L102" title="All 4 branches missed.">				else if (role.equals(&quot;branch&quot;) &amp;&amp; status.equals(&quot;approved&quot;)) {</span>
+<span class="nc" id="L103">					return &quot;redirect:/OnlineVehicleBookingSystem/BranchHomepage&quot;;</span>
+				}
+				
+<span class="nc bnc" id="L106" title="All 4 branches missed.">				else if (role.equals(&quot;customer&quot;) &amp;&amp; status.equals(&quot;approved&quot;)) {</span>
+<span class="nc" id="L107">					return &quot;redirect:/OnlineVehicleBookingSystem/CustomerHomepage&quot;;</span>
+				} 
+				
+				else {
+<span class="nc" id="L111">					M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
+<span class="nc" id="L112">					M.addAttribute(&quot;msg&quot;, &quot;Invalid Credentials&quot;);</span>
+<span class="nc" id="L113">					return &quot;login&quot;;</span>
+				}
+			}
+		}
+<span class="nc" id="L117">		catch (Exception E) {</span>
+<span class="nc" id="L118">			M.addAttribute(&quot;msg&quot;,&quot;Error. Contact System Admin for further details.&quot;);</span>
+<span class="nc" id="L119">			M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
+<span class="nc" id="L120">			return &quot;login&quot;;</span>
+		}
+	}
+		
+	@RequestMapping(&quot;OnlineVehicleBookingSystem/logout&quot;)
+	public String Logout(SessionStatus status, Model M) {
+<span class="nc" id="L126">		status.setComplete();</span>
+<span class="nc" id="L127">		M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
+<span class="nc" id="L128">		return &quot;redirect:/OnlineVehicleBookingSystem/login&quot;;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

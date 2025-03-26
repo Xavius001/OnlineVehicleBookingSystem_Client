@@ -1,1 +1,10 @@
+com\techwave\client\dao\TestClientCustomer.class
+com\techwave\client\controllers\TestLoginController.class
 com\techwave\client\ClientApplicationTests.class
+com\techwave\client\dao\TestClientBooking.class
+com\techwave\client\dao\TestClientLogin.class
+com\techwave\client\dao\TestClientVehicle.class
+com\techwave\client\controllers\TestCustomerController.class
+com\techwave\client\controllers\TestAdminController.class
+com\techwave\client\controllers\TestBranchController.class
+com\techwave\client\dao\TestClientBranch.class

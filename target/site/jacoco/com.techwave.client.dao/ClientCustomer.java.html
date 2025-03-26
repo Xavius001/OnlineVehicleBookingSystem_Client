@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClientCustomer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">client</a> &gt; <a href="index.source.html" class="el_package">com.techwave.client.dao</a> &gt; <span class="el_source">ClientCustomer.java</span></div><h1>ClientCustomer.java</h1><pre class="source lang-java linenums">package com.techwave.client.dao;
+
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.tomcat.util.buf.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
+
+import com.techwave.client.model.Customerdb;
+
+<span class="fc" id="L15">public class ClientCustomer extends ClientLogin implements IClientCustomer {</span>
+	
+	@Autowired
+	RestTemplate restTemplate;
+<span class="fc" id="L19">	public String url=&quot;http://localhost:8081/&quot;; //server</span>
+	@Override
+	public List&lt;Customerdb&gt; getAllCust() {
+<span class="nc" id="L22">		Customerdb list[] = restTemplate.getForObject(url+&quot;getAllCust&quot;, Customerdb[].class);</span>
+<span class="nc" id="L23">		return Arrays.asList(list);</span>
+	}
+	@Override
+	public Customerdb getByCustId(String custId) {
+<span class="nc" id="L27">		return restTemplate.getForObject(url+&quot;getByCustId/&quot;+custId, Customerdb.class);</span>
+	}
+	@Override
+	public String AddCust(Customerdb C) {
+<span class="nc" id="L31">		return restTemplate.postForObject(url+&quot;AddCust&quot;, C, String.class);</span>
+	}
+	@Override
+	public String DeleteCust(Customerdb C) {
+<span class="nc" id="L35">		restTemplate.delete(url+&quot;DeleteCust/&quot;+C.getcustId().getUserId(), String.class);</span>
+<span class="nc" id="L36">		return &quot;Customer deleted&quot;;</span>
+	}
+	
+	@Override
+	public String validateCustInfo(Customerdb info) {
+<span class="nc" id="L41">		return restTemplate.postForObject(url+&quot;validateCustInfo&quot;, info, String.class);</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -44,13 +44,13 @@ public class LoginController {
 			}
 			else {
 				M.addAttribute("logindb",creationRequest);
-				M.addAttribute("msg", cLogin.validateUserRequest(creationRequest));
+				M.addAttribute("msg", cLogin.newUserRequest(creationRequest));
 				return "register";
 			}
 		}
 		catch (Exception E) {
 			M.addAttribute("logindb", new Logindb());
-			M.addAttribute("msg", cLogin.validateUserRequest(creationRequest));
+			M.addAttribute("msg", cLogin.newUserRequest(creationRequest));
 			return "register";
 		}
 	}

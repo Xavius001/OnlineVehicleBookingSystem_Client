@@ -8,6 +8,9 @@ import java.util.List;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import com.techwave.client.model.Customerdb;
@@ -32,8 +35,16 @@ public class ClientCustomer extends ClientLogin implements IClientCustomer {
 	}
 	@Override
 	public String DeleteCust(Customerdb C) {
-		restTemplate.delete(url+"DeleteCust/"+C.getcustId().getUserId(), String.class);
-		return "Customer deleted";
+		// restTemplate.delete(url+"DeleteCust/"+C.getcustId().getUserId(), String.class);
+		// return "Customer deleted";
+		ResponseEntity<String> response = restTemplate.exchange(
+			url + "DeleteCust/" + C.getcustId().getUserId(), // URL with vehicle ID
+			HttpMethod.DELETE,                            // HTTP method
+			new HttpEntity<>(C),                       // Request body wrapped in HttpEntity
+			String.class                               // Expected response type
+    	);
+    	return response.getBody();
+
 	}
 	
 	@Override

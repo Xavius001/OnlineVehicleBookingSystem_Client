@@ -27,25 +27,27 @@ public class ClientBooking extends ClientBranch implements IClientBooking {
 	public String AddBooking(CustomerBooking cb) {
 		return restTemplate.postForObject(url+"AddBooking", cb, String.class);
 	}
+	
+	// REDO THE PUTS AND DELETE FOR THE METHODS BELOW (homework for tonight)
 	@Override
 	public String UpdateBooking(CustomerBooking cb) {
-		restTemplate.put(url+"UpdateBooking/"+cb.getBookingId(), String.class);
+		// restTemplate.put(url+"UpdateBooking/"+cb.getBookingId(), String.class);
 		return "Booking updated";
 	}
 	@Override
 	public String DeleteBooking(CustomerBooking cb) {
-		restTemplate.delete(url+"DeleteBooking/"+cb.getBookingId());
+		// restTemplate.delete(url+"DeleteBooking/"+cb.getBookingId());
 		return "Booking option deleted";
 	}
 	@Override
 	public String ApproveBooking(CustomerBooking cb, String bookingId) {
-		restTemplate.put(url+"ApproveBooking/"+bookingId, cb);
+		// restTemplate.put(url+"ApproveBooking/"+bookingId, cb);
 		return "Approved";
 	}
 	
 	@Override
 	public String RejectBooking(CustomerBooking cb, String bookingId) {
-		restTemplate.put(url+"RejectBooking/"+bookingId, cb);
+		// restTemplate.put(url+"RejectBooking/"+bookingId, cb);
 		return "Rejected";
 	}
 }

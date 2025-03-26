@@ -24,8 +24,8 @@ public interface IClientLogin {
 	
 	String validateLogin(Logindb L); //
 	
-	String validateUserRequest(Logindb newUser);
+	String newUserRequest(Logindb newUser);
 	
-	String validateUserStatus(String userId);
+	// String validateUserStatus(String userId);
 	
 }

@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -42,29 +45,21 @@ public class ClientBranch extends ClientCustomer implements IClientBranch {
 
 	@Override
 	public String DeleteBranch(Branchdb B) {
-		restTemplate.delete(url+"DeleteBranch", B);
-		return "Branch deleted.";
+		// restTemplate.delete(url+"DeleteBranch", B);
+		// return "Branch deleted.";
+		ResponseEntity<String> response = restTemplate.exchange(
+			url + "DeleteBranch/" + B.getbranchId().getUserId(), // URL with vehicle ID
+			HttpMethod.DELETE,                            // HTTP method
+			new HttpEntity<>(B),                       // Request body wrapped in HttpEntity
+			String.class                               // Expected response type
+    	);
+    	return response.getBody();
 	}
 
 	@Override
 	public List<String> getAllBranchIds() {
-		List<String> idList = new ArrayList<String>();
-		List<Branchdb> blist;
-		try {
-			blist = getAllBranches();
-			if(blist!=null) {
-				for(Branchdb B : blist) {
-					idList.add(B.getbranchId().getUserId());
-				}
-				return idList;
-			}
-			else {
-				throw new Exception();
-			}
-		}
-		catch(Exception E) {
-			return null;
-		}
+		String branchIds[] = restTemplate.getForObject(url+"GetAllBranchIds", String[].class);
+		return Arrays.asList(branchIds);
 	}
 	
 }
