@@ -8,7 +8,7 @@ public class Branchdb {
 	private String pno;
 	
 	public Logindb getbranchId() {
-<span class="nc" id="L11">		return branchId;</span>
+<span class="fc" id="L11">		return branchId;</span>
 	}
 
 	public void setbranchId(Logindb branchId) {
@@ -47,7 +47,13 @@ public class Branchdb {
 <span class="nc" id="L47">		this.pno = pno;</span>
 <span class="nc" id="L48">	}</span>
 
-<span class="fc" id="L50">	public Branchdb() {}</span>
+	public Branchdb() {
+<span class="fc" id="L51">		super();</span>
+<span class="fc" id="L52">		this.branchId = new Logindb();</span>
+<span class="fc" id="L53">		this.bLoc = &quot;&quot;;</span>
+<span class="fc" id="L54">		this.address = &quot;&quot;;</span>
+<span class="fc" id="L55">		this.pno = &quot;&quot;;</span>
+<span class="fc" id="L56">	}</span>
 	
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -48,7 +48,12 @@ public class CustomerBooking {
 		this.branchId = branchId;
 	}
 
-	public CustomerBooking(String bookingId, Customerdb custId, Vehicledb vehicleId, Branchdb branchId, String status) {
+	public CustomerBooking(
+		String bookingId, 
+		Customerdb custId, 
+		Vehicledb vehicleId, 
+		Branchdb branchId, 
+		String status) {
 		super();
 		this.bookingId = bookingId;
 		this.custId = custId;

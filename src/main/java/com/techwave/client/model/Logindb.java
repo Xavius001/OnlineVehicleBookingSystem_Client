@@ -50,6 +50,12 @@ public class Logindb {
 		this.status = status;
 	}
 
-	public Logindb() {}
+	public Logindb() {
+		super();
+		this.userId = "";
+		this.password = "";
+		this.role = "";
+		this.status = "";
+	}
 	
 }

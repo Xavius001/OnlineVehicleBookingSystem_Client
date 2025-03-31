@@ -11,42 +11,45 @@ import com.techwave.client.model.CustomerBooking;
 <span class="fc" id="L11">public class ClientBooking extends ClientBranch implements IClientBooking {</span>
 	
 	@Autowired
+    public
 	RestTemplate restTemplate;
-<span class="fc" id="L15">	public String url=&quot;http://localhost:8081/&quot;; //server</span>
+<span class="fc" id="L16">	public String url=&quot;http://localhost:8081/&quot;; //server</span>
 	
 	@Override
 	public List&lt;CustomerBooking&gt; getAllBookings() {
-<span class="nc" id="L19">		CustomerBooking list[] = restTemplate.getForObject(url+&quot;getAllBookings&quot;, CustomerBooking[].class);</span>
-<span class="nc" id="L20">		return Arrays.asList(list);</span>
+<span class="fc" id="L20">		CustomerBooking list[] = restTemplate.getForObject(url+&quot;getAllBookings&quot;, CustomerBooking[].class);</span>
+<span class="fc" id="L21">		return Arrays.asList(list);</span>
 	}
 	@Override
 	public CustomerBooking getByBookingId(String bookingId) {
-<span class="nc" id="L24">		return restTemplate.getForObject(url+&quot;getByBookingId/&quot;+bookingId, CustomerBooking.class);</span>
+<span class="fc" id="L25">		return restTemplate.getForObject(url+&quot;getByBookingId/&quot;+bookingId, CustomerBooking.class);</span>
 	}
 	@Override
 	public String AddBooking(CustomerBooking cb) {
-<span class="nc" id="L28">		return restTemplate.postForObject(url+&quot;AddBooking&quot;, cb, String.class);</span>
+<span class="fc" id="L29">		return restTemplate.postForObject(url+&quot;AddBooking&quot;, cb, String.class);</span>
 	}
+	
+	// REDO THE PUTS AND DELETE FOR THE METHODS BELOW (homework for tonight)
 	@Override
 	public String UpdateBooking(CustomerBooking cb) {
-<span class="nc" id="L32">		restTemplate.put(url+&quot;UpdateBooking/&quot;+cb.getBookingId(), String.class);</span>
-<span class="nc" id="L33">		return &quot;Booking updated&quot;;</span>
+		// restTemplate.put(url+&quot;UpdateBooking/&quot;+cb.getBookingId(), String.class);
+<span class="nc" id="L36">		return &quot;Booking updated&quot;;</span>
 	}
 	@Override
 	public String DeleteBooking(CustomerBooking cb) {
-<span class="nc" id="L37">		restTemplate.delete(url+&quot;DeleteBooking/&quot;+cb.getBookingId());</span>
-<span class="nc" id="L38">		return &quot;Booking option deleted&quot;;</span>
+		// restTemplate.delete(url+&quot;DeleteBooking/&quot;+cb.getBookingId());
+<span class="nc" id="L41">		return &quot;Booking option deleted&quot;;</span>
 	}
 	@Override
 	public String ApproveBooking(CustomerBooking cb, String bookingId) {
-<span class="nc" id="L42">		restTemplate.put(url+&quot;ApproveBooking/&quot;+bookingId, cb);</span>
-<span class="nc" id="L43">		return &quot;Approved&quot;;</span>
+		// restTemplate.put(url+&quot;ApproveBooking/&quot;+bookingId, cb);
+<span class="nc" id="L46">		return &quot;Approved&quot;;</span>
 	}
 	
 	@Override
 	public String RejectBooking(CustomerBooking cb, String bookingId) {
-<span class="nc" id="L48">		restTemplate.put(url+&quot;RejectBooking/&quot;+bookingId, cb);</span>
-<span class="nc" id="L49">		return &quot;Rejected&quot;;</span>
+		// restTemplate.put(url+&quot;RejectBooking/&quot;+bookingId, cb);
+<span class="nc" id="L52">		return &quot;Rejected&quot;;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

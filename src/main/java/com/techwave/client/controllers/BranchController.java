@@ -1,5 +1,6 @@
 package com.techwave.client.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,7 +82,6 @@ public class BranchController {
 	
 	@RequestMapping("OnlineVehicleBookingSystem/ApproveVehicleBooking")
 	public String approvePage(@SessionAttribute("logindb") Logindb L, Model M) {
-		
 		try {
 			List<CustomerBooking> cbList;
 			cbList = cBranch.getAllBookings().stream().filter(i->i.getBranchId().getbranchId().getUserId().equals(L.getUserId())).collect(Collectors.toList());
@@ -94,7 +94,7 @@ public class BranchController {
 			}
 		}
 		catch(Exception E) {
-			M.addAttribute("cbList", null);
+			M.addAttribute("cbList", new ArrayList<CustomerBooking>());
 			M.addAttribute("msg", "No bookings available.");
 			return "bAprVehBook";
 		}
@@ -146,7 +146,7 @@ public class BranchController {
 	
 	@RequestMapping("OnlineVehicleBookingSystem/RequestNewVehicles")
 	public String requestPage(@ModelAttribute("vehicledb") Vehicledb request, Model M) {
-		M.addAttribute("vehicldb", new Vehicledb());
+		M.addAttribute("vehicledb", new Vehicledb());
 		return "bReqNewVeh";
 	}
 	

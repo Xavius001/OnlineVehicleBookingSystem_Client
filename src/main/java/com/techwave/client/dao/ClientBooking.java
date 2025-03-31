@@ -11,6 +11,7 @@ import com.techwave.client.model.CustomerBooking;
 public class ClientBooking extends ClientBranch implements IClientBooking {
 	
 	@Autowired
+    public
 	RestTemplate restTemplate;
 	public String url="http://localhost:8081/"; //server
 	

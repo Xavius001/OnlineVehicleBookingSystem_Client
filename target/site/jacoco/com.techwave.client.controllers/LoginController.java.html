@@ -24,93 +24,93 @@ import com.techwave.client.dao.Client;
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem&quot;)
 	public String homePage(Model M) {
-<span class="nc" id="L27">		return &quot;home&quot;;</span>
+<span class="fc" id="L27">		return &quot;home&quot;;</span>
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/register&quot;)
 	public String registerPage(Model M) {
-<span class="nc" id="L32">		M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
-<span class="nc" id="L33">		return &quot;register&quot;;</span>
+<span class="fc" id="L32">		M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
+<span class="fc" id="L33">		return &quot;register&quot;;</span>
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/registered&quot;)
 	public String registeredPage(@Valid @ModelAttribute(&quot;logindb&quot;) Logindb creationRequest, BindingResult bs, Model M) {
 		try {
-<span class="nc bnc" id="L39" title="All 2 branches missed.">			if (bs.hasErrors()) {</span>
-<span class="nc" id="L40">				M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
-<span class="nc" id="L41">				M.addAttribute(&quot;msg&quot;, </span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">			if (bs.hasErrors()) {</span>
+<span class="fc" id="L40">				M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
+<span class="fc" id="L41">				M.addAttribute(&quot;msg&quot;, </span>
 						&quot;Error in creating your account. Contact System Administrator&quot;);
-<span class="nc" id="L43">				return &quot;register&quot;;</span>
+<span class="fc" id="L43">				return &quot;register&quot;;</span>
 			}
 			else {
-<span class="nc" id="L46">				M.addAttribute(&quot;logindb&quot;,creationRequest);</span>
-<span class="nc" id="L47">				M.addAttribute(&quot;msg&quot;, cLogin.validateUserRequest(creationRequest));</span>
-<span class="nc" id="L48">				return &quot;register&quot;;</span>
+<span class="fc" id="L46">				M.addAttribute(&quot;logindb&quot;,creationRequest);</span>
+<span class="fc" id="L47">				M.addAttribute(&quot;msg&quot;, cLogin.newUserRequest(creationRequest));</span>
+<span class="fc" id="L48">				return &quot;register&quot;;</span>
 			}
 		}
 <span class="nc" id="L51">		catch (Exception E) {</span>
 <span class="nc" id="L52">			M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
-<span class="nc" id="L53">			M.addAttribute(&quot;msg&quot;, cLogin.validateUserRequest(creationRequest));</span>
+<span class="nc" id="L53">			M.addAttribute(&quot;msg&quot;, cLogin.newUserRequest(creationRequest));</span>
 <span class="nc" id="L54">			return &quot;register&quot;;</span>
 		}
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/login&quot;)
 	public String loginPage(Model M) {
-<span class="nc" id="L60">		M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
-<span class="nc" id="L61">		return &quot;login&quot;;</span>
+<span class="fc" id="L60">		M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
+<span class="fc" id="L61">		return &quot;login&quot;;</span>
 	}
 
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/verify&quot;)
 	public String verifyPage(@RequestParam(&quot;email&quot;) String email, Model M) {
-<span class="nc" id="L66">		M.addAttribute(&quot;email&quot;, email);</span>
-<span class="nc" id="L67">		return &quot;verify&quot;;</span>
+<span class="fc" id="L66">		M.addAttribute(&quot;email&quot;, email);</span>
+<span class="fc" id="L67">		return &quot;verify&quot;;</span>
 	}
 
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/verified&quot;)
 	public String verifiedPage(@RequestParam(&quot;email&quot;) String email, Model M) {
-<span class="nc" id="L72">		cLogin.verifyEmail(email);</span>
-<span class="nc" id="L73">		M.addAttribute(&quot;email&quot;, email);</span>
-<span class="nc" id="L74">		M.addAttribute(&quot;msg&quot;, &quot;Your email has been verified. Please login to continue.&quot;);</span>
-<span class="nc" id="L75">		return &quot;verify&quot;;</span>
+<span class="fc" id="L72">		cLogin.verifyEmail(email);</span>
+<span class="fc" id="L73">		M.addAttribute(&quot;email&quot;, email);</span>
+<span class="fc" id="L74">		M.addAttribute(&quot;msg&quot;, &quot;Your email has been verified. Please login to continue.&quot;);</span>
+<span class="fc" id="L75">		return &quot;verify&quot;;</span>
 	}
 	
 	// check after updating server
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/Validatelogin&quot;) // check after updating server
 	public String ValidateLogin(@Valid @ModelAttribute(&quot;logindb&quot;) Logindb login, BindingResult bs, Model M) {
 		try {
-<span class="nc bnc" id="L82" title="All 2 branches missed.">			if (bs.hasErrors()) {</span>
-<span class="nc" id="L83">				M.addAttribute(&quot;msg&quot;,&quot;Error. Contact System Admin for further details.&quot;);</span>
-<span class="nc" id="L84">				return &quot;login&quot;;</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">			if (bs.hasErrors()) {</span>
+<span class="fc" id="L83">				M.addAttribute(&quot;msg&quot;,&quot;Error. Contact System Admin for further details.&quot;);</span>
+<span class="fc" id="L84">				return &quot;login&quot;;</span>
 			} 
 			else {
-<span class="nc" id="L87">				String role = cLogin.validateLogin(login);</span>
+<span class="fc" id="L87">				String role = cLogin.validateLogin(login);</span>
 
-<span class="nc" id="L89">				String status = cLogin.getLoginStatus(login);</span>
-<span class="nc bnc" id="L90" title="All 2 branches missed.">				if(!role.equals(&quot;Invalid&quot;)) {</span>
-<span class="nc" id="L91">					login.setRole(role);</span>
+<span class="fc" id="L89">				String status = cLogin.getLoginStatus(login);</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">				if(!role.equals(&quot;Invalid&quot;)) {</span>
+<span class="fc" id="L91">					login.setRole(role);</span>
 				}
-<span class="nc bnc" id="L93" title="All 2 branches missed.">				if(!status.equals(&quot;Invalid&quot;)) {</span>
-<span class="nc" id="L94">					login.setStatus(status);</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">				if(!status.equals(&quot;Invalid&quot;)) {</span>
+<span class="fc" id="L94">					login.setStatus(status);</span>
 				}
 				
-<span class="nc" id="L97">				M.addAttribute(&quot;logindb&quot;,login);</span>
-<span class="nc bnc" id="L98" title="All 4 branches missed.">				if (role.equals(&quot;admin&quot;) &amp;&amp; status.equals(&quot;approved&quot;)) {</span>
-<span class="nc" id="L99">					return &quot;redirect:/OnlineVehicleBookingSystem/AdminHomepage&quot;;</span>
+<span class="fc" id="L97">				M.addAttribute(&quot;logindb&quot;,login);</span>
+<span class="pc bpc" id="L98" title="1 of 4 branches missed.">				if (role.equals(&quot;admin&quot;) &amp;&amp; status.equals(&quot;approved&quot;)) {</span>
+<span class="fc" id="L99">					return &quot;redirect:/OnlineVehicleBookingSystem/AdminHomepage&quot;;</span>
 				} 
 				
-<span class="nc bnc" id="L102" title="All 4 branches missed.">				else if (role.equals(&quot;branch&quot;) &amp;&amp; status.equals(&quot;approved&quot;)) {</span>
-<span class="nc" id="L103">					return &quot;redirect:/OnlineVehicleBookingSystem/BranchHomepage&quot;;</span>
+<span class="pc bpc" id="L102" title="1 of 4 branches missed.">				else if (role.equals(&quot;branch&quot;) &amp;&amp; status.equals(&quot;approved&quot;)) {</span>
+<span class="fc" id="L103">					return &quot;redirect:/OnlineVehicleBookingSystem/BranchHomepage&quot;;</span>
 				}
 				
-<span class="nc bnc" id="L106" title="All 4 branches missed.">				else if (role.equals(&quot;customer&quot;) &amp;&amp; status.equals(&quot;approved&quot;)) {</span>
-<span class="nc" id="L107">					return &quot;redirect:/OnlineVehicleBookingSystem/CustomerHomepage&quot;;</span>
+<span class="pc bpc" id="L106" title="1 of 4 branches missed.">				else if (role.equals(&quot;customer&quot;) &amp;&amp; status.equals(&quot;approved&quot;)) {</span>
+<span class="fc" id="L107">					return &quot;redirect:/OnlineVehicleBookingSystem/CustomerHomepage&quot;;</span>
 				} 
 				
 				else {
-<span class="nc" id="L111">					M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
-<span class="nc" id="L112">					M.addAttribute(&quot;msg&quot;, &quot;Invalid Credentials&quot;);</span>
-<span class="nc" id="L113">					return &quot;login&quot;;</span>
+<span class="fc" id="L111">					M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
+<span class="fc" id="L112">					M.addAttribute(&quot;msg&quot;, &quot;Invalid Credentials&quot;);</span>
+<span class="fc" id="L113">					return &quot;login&quot;;</span>
 				}
 			}
 		}
@@ -123,9 +123,9 @@ import com.techwave.client.dao.Client;
 		
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/logout&quot;)
 	public String Logout(SessionStatus status, Model M) {
-<span class="nc" id="L126">		status.setComplete();</span>
-<span class="nc" id="L127">		M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
-<span class="nc" id="L128">		return &quot;redirect:/OnlineVehicleBookingSystem/login&quot;;</span>
+<span class="fc" id="L126">		status.setComplete();</span>
+<span class="fc" id="L127">		M.addAttribute(&quot;logindb&quot;, new Logindb());</span>
+<span class="fc" id="L128">		return &quot;redirect:/OnlineVehicleBookingSystem/login&quot;;</span>
 	}
 
 }

@@ -30,140 +30,140 @@ import com.techwave.client.model.Vehicledb;
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/AdminHomepage&quot;)
 	public String adminPage(Model M) {
-<span class="nc" id="L33">		return &quot;aHome&quot;;</span>
+<span class="fc" id="L33">		return &quot;aHome&quot;;</span>
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/AdminApprovalPage&quot;)
 	public String approveLoginPage(Model M) {
-<span class="nc" id="L38">		List&lt;Logindb&gt; list = cAdmin.getAllLogins().stream().filter(i-&gt;i.getStatus().equals(&quot;pending&quot;)).collect(Collectors.toList());</span>
-<span class="nc" id="L39">		M.addAttribute(&quot;loginList&quot;, list);</span>
-<span class="nc" id="L40">		return &quot;aAprAccReq&quot;;</span>
+<span class="pc" id="L38">		List&lt;Logindb&gt; list = cAdmin.getAllLogins().stream().filter(i-&gt;i.getStatus().equals(&quot;pending&quot;)).collect(Collectors.toList());</span>
+<span class="fc" id="L39">		M.addAttribute(&quot;loginList&quot;, list);</span>
+<span class="fc" id="L40">		return &quot;aAprAccReq&quot;;</span>
 	}
 	
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/AdminApprovalPage/All&quot;)
 	public String AllRequests(Model M) {
-<span class="nc" id="L46">		List&lt;Logindb&gt; list = cAdmin.getAllLogins();</span>
-<span class="nc" id="L47">		M.addAttribute(&quot;loginList&quot;, list);</span>
-<span class="nc" id="L48">		return &quot;aAprAccReq&quot;;</span>
+<span class="fc" id="L46">		List&lt;Logindb&gt; list = cAdmin.getAllLogins();</span>
+<span class="fc" id="L47">		M.addAttribute(&quot;loginList&quot;, list);</span>
+<span class="fc" id="L48">		return &quot;aAprAccReq&quot;;</span>
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/AdminApprovalPage/RoleSort&quot;)
 	public String SortRequestsByStatus(Model M) {
-<span class="nc" id="L53">		List&lt;Logindb&gt; list = cAdmin.getAllLogins().stream().sorted(new RoleSort()).collect(Collectors.toList());</span>
-<span class="nc" id="L54">		M.addAttribute(&quot;loginList&quot;, list);</span>
-<span class="nc" id="L55">		return &quot;aAprAccReq&quot;;</span>
+<span class="fc" id="L53">		List&lt;Logindb&gt; list = cAdmin.getAllLogins().stream().sorted(new RoleSort()).collect(Collectors.toList());</span>
+<span class="fc" id="L54">		M.addAttribute(&quot;loginList&quot;, list);</span>
+<span class="fc" id="L55">		return &quot;aAprAccReq&quot;;</span>
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/AdminApprovalPage/StatusSort&quot;)
 	public String SortRequestsByRole(Model M) {
-<span class="nc" id="L60">		List&lt;Logindb&gt; list = cAdmin.getAllLogins().stream().sorted(new StatusSort()).collect(Collectors.toList());</span>
-<span class="nc" id="L61">		M.addAttribute(&quot;loginList&quot;, list);</span>
-<span class="nc" id="L62">		return &quot;aAprAccReq&quot;;</span>
+<span class="fc" id="L60">		List&lt;Logindb&gt; list = cAdmin.getAllLogins().stream().sorted(new StatusSort()).collect(Collectors.toList());</span>
+<span class="fc" id="L61">		M.addAttribute(&quot;loginList&quot;, list);</span>
+<span class="fc" id="L62">		return &quot;aAprAccReq&quot;;</span>
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/AdminApprovalPage/ApproveLogin&quot;)
 	public String approveLoginPage2(@RequestParam(name=&quot;loginItem[]&quot;, required=false) String[] loginItem, Model M) {
 		try {
-<span class="nc bnc" id="L68" title="All 2 branches missed.">			if(loginItem!=null) {</span>
-<span class="nc bnc" id="L69" title="All 2 branches missed.">				for(String s : loginItem) {</span>
-<span class="nc" id="L70">					Logindb L = cAdmin.getByLoginId(s);</span>
-<span class="nc" id="L71">					String msg = cAdmin.ApproveLogin(L, s);</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">			if(loginItem!=null) {</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">				for(String s : loginItem) {</span>
+<span class="fc" id="L70">					Logindb L = cAdmin.getByLoginId(s);</span>
+<span class="fc" id="L71">					String msg = cAdmin.ApproveLogin(L, s);</span>
 				}
-<span class="nc" id="L73">				List&lt;Logindb&gt; list = cAdmin.getAllLogins();</span>
-<span class="nc" id="L74">				M.addAttribute(&quot;loginList&quot;, list);</span>
-<span class="nc" id="L75">				System.out.println(&quot;not null&quot;);</span>
-<span class="nc" id="L76">				return &quot;aAprAccReq&quot;;</span>
+<span class="fc" id="L73">				List&lt;Logindb&gt; list = cAdmin.getAllLogins();</span>
+<span class="fc" id="L74">				M.addAttribute(&quot;loginList&quot;, list);</span>
+<span class="fc" id="L75">				System.out.println(&quot;not null&quot;);</span>
+<span class="fc" id="L76">				return &quot;aAprAccReq&quot;;</span>
 			}
 			else {
-<span class="nc" id="L79">				throw new Exception();</span>
+<span class="fc" id="L79">				throw new Exception();</span>
 			}
 		} 
-<span class="nc" id="L82">		catch(Exception E) {</span>
-<span class="nc" id="L83">			M.addAttribute(&quot;msg&quot;, &quot;Nothing was checked.&quot;);</span>
-<span class="nc" id="L84">			return approveLoginPage(M);</span>
+<span class="fc" id="L82">		catch(Exception E) {</span>
+<span class="fc" id="L83">			M.addAttribute(&quot;msg&quot;, &quot;Nothing was checked.&quot;);</span>
+<span class="fc" id="L84">			return approveLoginPage(M);</span>
 		}
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/AdminApprovalPage/RejectLogin&quot;)
 	public String approveLoginPage3(@RequestParam(name=&quot;loginItem[]&quot;, required=false) String[] loginItem, Model M) {
 		try {
-<span class="nc bnc" id="L91" title="All 2 branches missed.">			if(loginItem!=null) {</span>
-<span class="nc bnc" id="L92" title="All 2 branches missed.">				for(String s : loginItem) {</span>
-<span class="nc" id="L93">					Logindb L = cAdmin.getByLoginId(s);</span>
-<span class="nc" id="L94">					String msg = cAdmin.RejectLogin(L, s);</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">			if(loginItem!=null) {</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">				for(String s : loginItem) {</span>
+<span class="fc" id="L93">					Logindb L = cAdmin.getByLoginId(s);</span>
+<span class="fc" id="L94">					String msg = cAdmin.RejectLogin(L, s);</span>
 				}
-<span class="nc" id="L96">				List&lt;Logindb&gt; list = cAdmin.getAllLogins();</span>
-<span class="nc" id="L97">				M.addAttribute(&quot;loginList&quot;, list);</span>
-<span class="nc" id="L98">				return &quot;aAprAccReq&quot;;</span>
+<span class="fc" id="L96">				List&lt;Logindb&gt; list = cAdmin.getAllLogins();</span>
+<span class="fc" id="L97">				M.addAttribute(&quot;loginList&quot;, list);</span>
+<span class="fc" id="L98">				return &quot;aAprAccReq&quot;;</span>
 			}
 			else {
-<span class="nc" id="L101">				throw new Exception();</span>
+<span class="fc" id="L101">				throw new Exception();</span>
 			}
 		} 
-<span class="nc" id="L104">		catch(Exception E) {</span>
-<span class="nc" id="L105">			M.addAttribute(&quot;msg&quot;, &quot;Nothing was checked.&quot;);</span>
-<span class="nc" id="L106">			return approveLoginPage(M);</span>
+<span class="fc" id="L104">		catch(Exception E) {</span>
+<span class="fc" id="L105">			M.addAttribute(&quot;msg&quot;, &quot;Nothing was checked.&quot;);</span>
+<span class="fc" id="L106">			return approveLoginPage(M);</span>
 		}
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/ApproveNewVehicleRequest&quot;)
 	public String approveRequestPage(Model M) {
-<span class="nc" id="L112">		M.addAttribute(&quot;vlist&quot;, cAdmin.displayRequests());</span>
-<span class="nc" id="L113">		return &quot;aAprVehReq&quot;;</span>
+<span class="fc" id="L112">		M.addAttribute(&quot;vlist&quot;, cAdmin.displayRequests());</span>
+<span class="fc" id="L113">		return &quot;aAprVehReq&quot;;</span>
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/ApproveNewVehicleRequest/Approve&quot;)
 	public String approveRequestPage2(@RequestParam(name=&quot;requests[]&quot;, required=false) String[] requests, Model M) {
 		try {
-<span class="nc bnc" id="L119" title="All 2 branches missed.">			if(requests!=null) {</span>
-<span class="nc" id="L120">				List&lt;Vehicledb&gt; vlist = cAdmin.displayRequests();</span>
-<span class="nc" id="L121">				List&lt;String&gt; msg = new ArrayList&lt;String&gt;();</span>
-<span class="nc bnc" id="L122" title="All 2 branches missed.">				for(String s : requests) {</span>
-<span class="nc" id="L123">					Vehicledb v = vlist.stream().filter(i-&gt;i.getVehicleId().equals(s)).collect(Collectors.toList()).get(0);</span>
-<span class="nc" id="L124">					msg.add(cAdmin.approveVehicle(v));</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">			if(requests!=null) {</span>
+<span class="fc" id="L120">				List&lt;Vehicledb&gt; vlist = cAdmin.displayRequests();</span>
+<span class="fc" id="L121">				List&lt;String&gt; msg = new ArrayList&lt;String&gt;();</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">				for(String s : requests) {</span>
+<span class="fc" id="L123">					Vehicledb v = vlist.stream().filter(i-&gt;i.getVehicleId().equals(s)).collect(Collectors.toList()).get(0);</span>
+<span class="fc" id="L124">					msg.add(cAdmin.approveVehicle(v));</span>
 				}
-<span class="nc" id="L126">				M.addAttribute(&quot;msg&quot;, msg);</span>
-<span class="nc" id="L127">				return approveRequestPage(M);</span>
+<span class="fc" id="L126">				M.addAttribute(&quot;msg&quot;, msg);</span>
+<span class="fc" id="L127">				return approveRequestPage(M);</span>
 			}
 			else {
-<span class="nc" id="L130">				throw new Exception();</span>
+<span class="fc" id="L130">				throw new Exception();</span>
 			}
 		}
-<span class="nc" id="L133">		catch (Exception E) {</span>
-<span class="nc" id="L134">			M.addAttribute(&quot;msg&quot;, &quot;Nothing was checked.&quot;);</span>
-<span class="nc" id="L135">			return approveRequestPage(M);</span>
+<span class="fc" id="L133">		catch (Exception E) {</span>
+<span class="fc" id="L134">			M.addAttribute(&quot;msg&quot;, &quot;Nothing was checked.&quot;);</span>
+<span class="fc" id="L135">			return approveRequestPage(M);</span>
 		}
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/ApproveNewVehicleRequest/Reject&quot;)
 	public String approveRequestPage3(@RequestParam(name=&quot;requests[]&quot;, required=false) String[] requests, Model M) {
 		try {
-<span class="nc bnc" id="L142" title="All 2 branches missed.">			if(requests!=null) {</span>
-<span class="nc" id="L143">				List&lt;Vehicledb&gt; vlist = cAdmin.displayRequests();</span>
-<span class="nc" id="L144">				List&lt;String&gt; msg = new ArrayList&lt;String&gt;();</span>
-<span class="nc bnc" id="L145" title="All 2 branches missed.">				for(String s : requests) {</span>
-<span class="nc" id="L146">					Vehicledb v = vlist.stream().filter(i-&gt;i.getVehicleId().equals(s)).collect(Collectors.toList()).get(0);</span>
-<span class="nc" id="L147">					msg.add(cAdmin.rejectVehicle(v));</span>
+<span class="fc bfc" id="L142" title="All 2 branches covered.">			if(requests!=null) {</span>
+<span class="fc" id="L143">				List&lt;Vehicledb&gt; vlist = cAdmin.displayRequests();</span>
+<span class="fc" id="L144">				List&lt;String&gt; msg = new ArrayList&lt;String&gt;();</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">				for(String s : requests) {</span>
+<span class="fc" id="L146">					Vehicledb v = vlist.stream().filter(i-&gt;i.getVehicleId().equals(s)).collect(Collectors.toList()).get(0);</span>
+<span class="fc" id="L147">					msg.add(cAdmin.rejectVehicle(v));</span>
 				}
-<span class="nc" id="L149">				M.addAttribute(&quot;msglist&quot;, msg);</span>
-<span class="nc" id="L150">				return approveRequestPage(M);</span>
+<span class="fc" id="L149">				M.addAttribute(&quot;msglist&quot;, msg);</span>
+<span class="fc" id="L150">				return approveRequestPage(M);</span>
 			}
 			else {
-<span class="nc" id="L153">				throw new Exception();</span>
+<span class="fc" id="L153">				throw new Exception();</span>
 			}
 		}
-<span class="nc" id="L156">		catch (Exception E) {</span>
-<span class="nc" id="L157">			M.addAttribute(&quot;msg&quot;, &quot;Nothing was checked.&quot;);</span>
-<span class="nc" id="L158">			return approveRequestPage(M);</span>
+<span class="fc" id="L156">		catch (Exception E) {</span>
+<span class="fc" id="L157">			M.addAttribute(&quot;msg&quot;, &quot;Nothing was checked.&quot;);</span>
+<span class="fc" id="L158">			return approveRequestPage(M);</span>
 		}
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/AddNewVehicle&quot;)
 	public String addNewVehicle(@ModelAttribute(&quot;vehicledb&quot;) Vehicledb V, BindingResult bs, Model M) {
 			try {
-<span class="nc bnc" id="L165" title="All 2 branches missed.">				if(bs.hasErrors()) return &quot;aAddNewVeh&quot;;</span>
-<span class="nc bnc" id="L166" title="All 2 branches missed.">				else if (!bs.hasErrors()) return &quot;aAddNewVeh&quot;;</span>
+<span class="pc bpc" id="L165" title="1 of 2 branches missed.">				if(bs.hasErrors()) return &quot;aAddNewVeh&quot;;</span>
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">				else if (!bs.hasErrors()) return &quot;aAddNewVeh&quot;;</span>
 <span class="nc" id="L167">				else throw new Exception();</span>
 			}
 <span class="nc" id="L169">			catch (Exception E) {</span>
@@ -175,20 +175,20 @@ import com.techwave.client.model.Vehicledb;
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/AddNewVehicle/Added&quot;)
 	public String addNewVehicle2(@Valid @ModelAttribute(&quot;vehicledb&quot;) Vehicledb V, BindingResult bs, Model M) {
 			try {
-<span class="nc bnc" id="L178" title="All 2 branches missed.">				if(bs.hasErrors()) {</span>
+<span class="pc bpc" id="L178" title="1 of 2 branches missed.">				if(bs.hasErrors()) {</span>
 <span class="nc" id="L179">					M.addAttribute(&quot;msg&quot;, bs.getAllErrors());</span>
 <span class="nc" id="L180">					return &quot;aAddNewVeh&quot;;</span>
 				}
-<span class="nc bnc" id="L182" title="All 2 branches missed.">				else if (!bs.hasErrors()) {</span>
-<span class="nc" id="L183">					Vehicledb old = cAdmin.getByVehicleId(V.getVehicleId());</span>
-<span class="nc bnc" id="L184" title="All 2 branches missed.">					if(old==null) {</span>
-<span class="nc" id="L185">						Branchdb B = cAdmin.getByBranchId(V.getbranchId().getbranchId().getUserId());</span>
-<span class="nc" id="L186">						V.setbranchId(B);</span>
-<span class="nc" id="L187">						cAdmin.AddVehicle(V);</span>
-<span class="nc" id="L188">						M.addAttribute(&quot;msg&quot;, &quot;Vehicle added successfully&quot;);</span>
-<span class="nc" id="L189">					}</span>
-<span class="nc" id="L190">					else M.addAttribute(&quot;msg&quot;, &quot;A vehicle with this ID already exists. Try again.&quot;);</span>
-<span class="nc" id="L191">					return &quot;aAddNewVeh&quot;;</span>
+<span class="pc bpc" id="L182" title="1 of 2 branches missed.">				else if (!bs.hasErrors()) {</span>
+<span class="fc" id="L183">					Vehicledb old = cAdmin.getByVehicleId(V.getVehicleId());</span>
+<span class="fc bfc" id="L184" title="All 2 branches covered.">					if(old==null) {</span>
+<span class="fc" id="L185">						Branchdb B = cAdmin.getByBranchId(V.getbranchId().getbranchId().getUserId());</span>
+<span class="fc" id="L186">						V.setbranchId(B);</span>
+<span class="fc" id="L187">						cAdmin.AddVehicle(V);</span>
+<span class="fc" id="L188">						M.addAttribute(&quot;msg&quot;, &quot;Vehicle added successfully&quot;);</span>
+<span class="fc" id="L189">					}</span>
+<span class="fc" id="L190">					else M.addAttribute(&quot;msg&quot;, &quot;A vehicle with this ID already exists. Try again.&quot;);</span>
+<span class="fc" id="L191">					return &quot;aAddNewVeh&quot;;</span>
 				}
 <span class="nc" id="L193">				else throw new Exception();</span>
 			}
@@ -199,7 +199,7 @@ import com.techwave.client.model.Vehicledb;
 	}
 }
 
-<span class="nc" id="L202">class RoleSort implements Comparator&lt;Logindb&gt; {</span>
+<span class="fc" id="L202">class RoleSort implements Comparator&lt;Logindb&gt; {</span>
     @Override
     public int compare(Logindb o1, Logindb o2) {
 <span class="nc" id="L205">        return o1.getRole().compareTo(o2.getRole());</span>
@@ -207,7 +207,7 @@ import com.techwave.client.model.Vehicledb;
 }
 
 
-<span class="nc" id="L210">class StatusSort implements Comparator&lt;Logindb&gt; {</span>
+<span class="fc" id="L210">class StatusSort implements Comparator&lt;Logindb&gt; {</span>
     @Override
     public int compare(Logindb o1, Logindb o2) {
 <span class="nc" id="L213">        return o1.getStatus().compareTo(o2.getStatus());</span>

@@ -81,8 +81,15 @@ public class Vehicledb {
 		this.status = status;
 	}
 
-	public Vehicledb(String vehicleId, String manufactureName, String color, Integer seatingCapacity, Integer price, Branchdb branchId,
-			Integer stock, String status) {
+	public Vehicledb(
+	String vehicleId, 
+	String manufactureName, 
+	String color, 
+	Integer seatingCapacity, 
+	Integer price, 
+	Branchdb branchId,
+	Integer stock, 
+	String status) {
 		super();
 		this.vehicleId = vehicleId;
 		this.manufactureName = manufactureName;
@@ -94,7 +101,17 @@ public class Vehicledb {
 		this.status = status;
 	}
 
-	public Vehicledb() {}
+	public Vehicledb() {
+		super();
+		this.vehicleId = "";
+		this.manufactureName = "";
+		this.color = "";
+		this.seatingCapacity = -1;
+		this.price = -1;
+		this.branchId = new Branchdb();
+		this.stock = -1;
+		this.status = "";
+	}
 
 	@Override
 	public String toString() {

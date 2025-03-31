@@ -11,7 +11,7 @@ public class Logindb {
 	private String status;
 	
 	public String getUserId() {
-<span class="nc" id="L14">		return userId;</span>
+<span class="fc" id="L14">		return userId;</span>
 	}
 
 	public void setUserId(String userId) {
@@ -50,7 +50,13 @@ public class Logindb {
 <span class="nc" id="L50">		this.status = status;</span>
 <span class="nc" id="L51">	}</span>
 
-<span class="fc" id="L53">	public Logindb() {}</span>
+	public Logindb() {
+<span class="fc" id="L54">		super();</span>
+<span class="fc" id="L55">		this.userId = &quot;&quot;;</span>
+<span class="fc" id="L56">		this.password = &quot;&quot;;</span>
+<span class="fc" id="L57">		this.role = &quot;&quot;;</span>
+<span class="fc" id="L58">		this.status = &quot;&quot;;</span>
+<span class="fc" id="L59">	}</span>
 	
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

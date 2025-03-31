@@ -47,6 +47,12 @@ public class Branchdb {
 		this.pno = pno;
 	}
 
-	public Branchdb() {}
+	public Branchdb() {
+		super();
+		this.branchId = new Logindb();
+		this.bLoc = "";
+		this.address = "";
+		this.pno = "";
+	}
 	
 }
