@@ -10,9 +10,11 @@ public class Vehicledb {
 	private String color;
 	
 	private Integer seatingCapacity;
+	
 	private Integer price;
 	
 	private Branchdb branchId;
+	
 	private Integer stock;
 
 	private String status;

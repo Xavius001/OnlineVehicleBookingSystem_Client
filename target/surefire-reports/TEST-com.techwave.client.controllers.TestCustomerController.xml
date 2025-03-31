@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.techwave.client.controllers.TestAdminController" time="1.783" tests="17" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.techwave.client.controllers.TestCustomerController" time="0.771" tests="14" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,21 +58,18 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="testAddNewVehicle2WithError" classname="com.techwave.client.controllers.TestAdminController" time="0.231"/>
-  <testcase name="testAddNewVehicle2" classname="com.techwave.client.controllers.TestAdminController" time="0.005"/>
-  <testcase name="testApproveRequestPage" classname="com.techwave.client.controllers.TestAdminController" time="0.006"/>
-  <testcase name="testAddNewVehicle" classname="com.techwave.client.controllers.TestAdminController" time="0.005"/>
-  <testcase name="testApproveRequestPage2" classname="com.techwave.client.controllers.TestAdminController" time="0.008"/>
-  <testcase name="testApproveRequestPage3" classname="com.techwave.client.controllers.TestAdminController" time="0.008"/>
-  <testcase name="testAllRequests" classname="com.techwave.client.controllers.TestAdminController" time="0.007"/>
-  <testcase name="testApproveRequestPage3WCatch" classname="com.techwave.client.controllers.TestAdminController" time="0.006"/>
-  <testcase name="testApproveLoginPage3WithNull" classname="com.techwave.client.controllers.TestAdminController" time="0.007"/>
-  <testcase name="testSortRequestsByStatus" classname="com.techwave.client.controllers.TestAdminController" time="0.006"/>
-  <testcase name="testApproveLoginPage" classname="com.techwave.client.controllers.TestAdminController" time="0.005"/>
-  <testcase name="testAdminPage" classname="com.techwave.client.controllers.TestAdminController" time="0.004"/>
-  <testcase name="testSortRequestsByRole" classname="com.techwave.client.controllers.TestAdminController" time="0.006"/>
-  <testcase name="testApproveLoginPage2WithNull" classname="com.techwave.client.controllers.TestAdminController" time="0.006"/>
-  <testcase name="testApproveLoginPage2" classname="com.techwave.client.controllers.TestAdminController" time="0.009"/>
-  <testcase name="testApproveLoginPage3" classname="com.techwave.client.controllers.TestAdminController" time="0.007"/>
-  <testcase name="testApproveRequestPage2Catch" classname="com.techwave.client.controllers.TestAdminController" time="0.008"/>
+  <testcase name="testCustSaveInvalid" classname="com.techwave.client.controllers.TestCustomerController" time="0.033"/>
+  <testcase name="testVehicleBooked" classname="com.techwave.client.controllers.TestCustomerController" time="0.029"/>
+  <testcase name="testVehicleSearch" classname="com.techwave.client.controllers.TestCustomerController" time="0.006"/>
+  <testcase name="testBookingPageCatch" classname="com.techwave.client.controllers.TestCustomerController" time="0.007"/>
+  <testcase name="testVehicleDisplay" classname="com.techwave.client.controllers.TestCustomerController" time="0.012"/>
+  <testcase name="testBookingPage" classname="com.techwave.client.controllers.TestCustomerController" time="0.008"/>
+  <testcase name="testVehicleBookedCatch" classname="com.techwave.client.controllers.TestCustomerController" time="0.018"/>
+  <testcase name="testVehicleBookedNull" classname="com.techwave.client.controllers.TestCustomerController" time="0.008"/>
+  <testcase name="testVehicleDisplayException" classname="com.techwave.client.controllers.TestCustomerController" time="0.013"/>
+  <testcase name="testCustPage" classname="com.techwave.client.controllers.TestCustomerController" time="0.019"/>
+  <testcase name="testCustSave" classname="com.techwave.client.controllers.TestCustomerController" time="0.008"/>
+  <testcase name="testVehicleSearchNull" classname="com.techwave.client.controllers.TestCustomerController" time="0.007"/>
+  <testcase name="testVehicleDisplayNull" classname="com.techwave.client.controllers.TestCustomerController" time="0.011"/>
+  <testcase name="testCustPageNull" classname="com.techwave.client.controllers.TestCustomerController" time="0.007"/>
 </testsuite>

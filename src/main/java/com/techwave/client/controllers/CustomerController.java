@@ -90,56 +90,52 @@ public class CustomerController {
 			M.addAttribute("branchIds", branchIds);
 		}
 		else {
-			M.addAttribute("branchIds", null);
+			M.addAttribute("branchIds", new ArrayList<String>());
 		}
 		M.addAttribute("vehicledb", new Vehicledb());
-		M.addAttribute("vlist", null);
+		M.addAttribute("vlist", new ArrayList<Vehicledb>());
 		return "cVehSearch";
 	}
 	
 	@RequestMapping("OnlineVehicleBookingSystem/VehicleSearch/Display")
 	public String vehicleDisplay(@Valid @ModelAttribute("vehicledb") Vehicledb search, BindingResult bs, @RequestParam("price1") String price1, @RequestParam("price2") String price2, Model M) {
 		try {
-			
 			if(bs.hasErrors()) {
 				M.addAttribute("msg", bs.getAllErrors());
 				return vehicleSearch(M);
-			}
-			else if (!bs.hasErrors()) {
+			} else if (!bs.hasErrors()) {
 				List<Vehicledb> vlist;
-				if(price1==null || price2==null) {
-					vlist = cCustomer.searchVehicles(search, null, null);
-				}
-				else {
+				if(price1=="" || price2=="" || 
+				Integer.parseInt(price1)>Integer.parseInt(price2) 
+				|| Integer.parseInt(price1) < 0 
+				|| Integer.parseInt(price2) < 0) {
+					throw new NumberFormatException();
+				} else {
 					int p1 = Integer.parseInt(price1);
 					int p2 = Integer.parseInt(price2);
 					vlist = cCustomer.searchVehicles(search, p1, p2);
 				}
-				List<String> branchIds = cCustomer.getAllBranchIds();
 				if(vlist!=null) {
 					M.addAttribute("vlist", vlist);
+				} else {
+					M.addAttribute("vlist", new ArrayList<Vehicledb>());
 				}
-				else {
-					M.addAttribute("vlist", null);
-				}
+				List<String> branchIds = cCustomer.getAllBranchIds();
 				if(branchIds!=null) {
 					M.addAttribute("branchIds", branchIds);
-				}
-				else {
-					M.addAttribute("branchIds", null);
+				} else {
+					M.addAttribute("branchIds", new ArrayList<Branchdb>());
 				}
 				M.addAttribute("vehicledb", search);
 				M.addAttribute("price1", price1);
 				M.addAttribute("price2", price2);
 				System.out.println("no bs error");
 				return "cVehSearch";
-			}
-			else {
+			} else {
 				throw new Exception();
 			}
-		}
-		catch(Exception E) {
-			M.addAttribute("msg", E.getMessage());
+		} catch(Exception E) {
+			M.addAttribute("msg", "Prices cannot be empty. Price 1 must be lower than Price 2. Both prices cannot be less than $0.");
 			return vehicleSearch(M);
 		}
 	}
@@ -175,7 +171,7 @@ public class CustomerController {
 				M.addAttribute("vlist", vlist);
 				M.addAttribute("vehicledb", search);
 				M.addAttribute("msg2", "Vehicles have been booked");
-				System.out.println("no error in book");
+				// System.out.println("no error in book");
 				return "cVehSearch";
 			}
 			else {

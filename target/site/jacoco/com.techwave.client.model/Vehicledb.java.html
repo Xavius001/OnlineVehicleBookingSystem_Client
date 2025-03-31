@@ -10,76 +10,78 @@ public class Vehicledb {
 	private String color;
 	
 	private Integer seatingCapacity;
+	
 	private Integer price;
 	
 	private Branchdb branchId;
+	
 	private Integer stock;
 
 	private String status;
 	
 	public String getVehicleId() {
-<span class="fc" id="L21">		return vehicleId;</span>
+<span class="fc" id="L23">		return vehicleId;</span>
 	}
 
 	public void setVehicleId(String vehicleId) {
-<span class="fc" id="L25">		this.vehicleId = vehicleId;</span>
-<span class="fc" id="L26">	}</span>
+<span class="fc" id="L27">		this.vehicleId = vehicleId;</span>
+<span class="fc" id="L28">	}</span>
 
 	public String getManufactureName() {
-<span class="fc" id="L29">		return manufactureName;</span>
+<span class="fc" id="L31">		return manufactureName;</span>
 	}
 
 	public void setManufactureName(String manufactureName) {
-<span class="fc" id="L33">		this.manufactureName = manufactureName;</span>
-<span class="fc" id="L34">	}</span>
+<span class="fc" id="L35">		this.manufactureName = manufactureName;</span>
+<span class="fc" id="L36">	}</span>
 
 	public String getColor() {
-<span class="fc" id="L37">		return color;</span>
+<span class="fc" id="L39">		return color;</span>
 	}
 
 	public void setColor(String color) {
-<span class="fc" id="L41">		this.color = color;</span>
-<span class="fc" id="L42">	}</span>
+<span class="fc" id="L43">		this.color = color;</span>
+<span class="fc" id="L44">	}</span>
 
 	public Integer getSeatingCapacity() {
-<span class="nc" id="L45">		return seatingCapacity;</span>
+<span class="nc" id="L47">		return seatingCapacity;</span>
 	}
 
 	public void setSeatingCapacity(Integer seatingCapacity) {
-<span class="fc" id="L49">		this.seatingCapacity = seatingCapacity;</span>
-<span class="fc" id="L50">	}</span>
+<span class="fc" id="L51">		this.seatingCapacity = seatingCapacity;</span>
+<span class="fc" id="L52">	}</span>
 
 	public Integer getPrice() {
-<span class="fc" id="L53">		return price;</span>
+<span class="fc" id="L55">		return price;</span>
 	}
 
 	public void setPrice(Integer price) {
-<span class="fc" id="L57">		this.price = price;</span>
-<span class="fc" id="L58">	}</span>
+<span class="fc" id="L59">		this.price = price;</span>
+<span class="fc" id="L60">	}</span>
 
 	public Branchdb getbranchId() {
-<span class="fc" id="L61">		return branchId;</span>
+<span class="fc" id="L63">		return branchId;</span>
 	}
 
 	public void setbranchId(Branchdb branchId) {
-<span class="fc" id="L65">		this.branchId = branchId;</span>
-<span class="fc" id="L66">	}</span>
+<span class="fc" id="L67">		this.branchId = branchId;</span>
+<span class="fc" id="L68">	}</span>
 
 	public Integer getStock() {
-<span class="fc" id="L69">		return stock;</span>
+<span class="fc" id="L71">		return stock;</span>
 	}
 
 	public void setStock(Integer stock) {
-<span class="fc" id="L73">		this.stock = stock;</span>
-<span class="fc" id="L74">	}</span>
+<span class="fc" id="L75">		this.stock = stock;</span>
+<span class="fc" id="L76">	}</span>
 
 	public String getStatus() {
-<span class="nc" id="L77">		return status;</span>
+<span class="nc" id="L79">		return status;</span>
 	}
 
 	public void setStatus(String status) {
-<span class="fc" id="L81">		this.status = status;</span>
-<span class="fc" id="L82">	}</span>
+<span class="fc" id="L83">		this.status = status;</span>
+<span class="fc" id="L84">	}</span>
 
 	public Vehicledb(
 	String vehicleId, 
@@ -90,34 +92,34 @@ public class Vehicledb {
 	Branchdb branchId,
 	Integer stock, 
 	String status) {
-<span class="fc" id="L93">		super();</span>
-<span class="fc" id="L94">		this.vehicleId = vehicleId;</span>
-<span class="fc" id="L95">		this.manufactureName = manufactureName;</span>
-<span class="fc" id="L96">		this.color = color;</span>
-<span class="fc" id="L97">		this.seatingCapacity = seatingCapacity;</span>
-<span class="fc" id="L98">		this.price = price;</span>
-<span class="fc" id="L99">		this.branchId = branchId;</span>
-<span class="fc" id="L100">		this.stock = stock;</span>
-<span class="fc" id="L101">		this.status = status;</span>
-<span class="fc" id="L102">	}</span>
+<span class="fc" id="L95">		super();</span>
+<span class="fc" id="L96">		this.vehicleId = vehicleId;</span>
+<span class="fc" id="L97">		this.manufactureName = manufactureName;</span>
+<span class="fc" id="L98">		this.color = color;</span>
+<span class="fc" id="L99">		this.seatingCapacity = seatingCapacity;</span>
+<span class="fc" id="L100">		this.price = price;</span>
+<span class="fc" id="L101">		this.branchId = branchId;</span>
+<span class="fc" id="L102">		this.stock = stock;</span>
+<span class="fc" id="L103">		this.status = status;</span>
+<span class="fc" id="L104">	}</span>
 
 	public Vehicledb() {
-<span class="fc" id="L105">		super();</span>
-<span class="fc" id="L106">		this.vehicleId = &quot;&quot;;</span>
-<span class="fc" id="L107">		this.manufactureName = &quot;&quot;;</span>
-<span class="fc" id="L108">		this.color = &quot;&quot;;</span>
-<span class="fc" id="L109">		this.seatingCapacity = -1;</span>
-<span class="fc" id="L110">		this.price = -1;</span>
-<span class="fc" id="L111">		this.branchId = new Branchdb();</span>
-<span class="fc" id="L112">		this.stock = -1;</span>
-<span class="fc" id="L113">		this.status = &quot;&quot;;</span>
-<span class="fc" id="L114">	}</span>
+<span class="fc" id="L107">		super();</span>
+<span class="fc" id="L108">		this.vehicleId = &quot;&quot;;</span>
+<span class="fc" id="L109">		this.manufactureName = &quot;&quot;;</span>
+<span class="fc" id="L110">		this.color = &quot;&quot;;</span>
+<span class="fc" id="L111">		this.seatingCapacity = -1;</span>
+<span class="fc" id="L112">		this.price = -1;</span>
+<span class="fc" id="L113">		this.branchId = new Branchdb();</span>
+<span class="fc" id="L114">		this.stock = -1;</span>
+<span class="fc" id="L115">		this.status = &quot;&quot;;</span>
+<span class="fc" id="L116">	}</span>
 
 	@Override
 	public String toString() {
-<span class="fc" id="L118">		String price1 = this.price.toString();</span>
-<span class="fc" id="L119">		String stock1 = this.stock.toString();</span>
-<span class="fc" id="L120">		return &quot;Vid-&quot;+this.vehicleId+&quot; Manu:&quot;+this.manufactureName+&quot; price:&quot;+price1+&quot; color:&quot;+this.color+&quot; stock:&quot;+stock1+&quot; branchid:&quot;+this.getbranchId().getbranchId().getUserId();</span>
+<span class="fc" id="L120">		String price1 = this.price.toString();</span>
+<span class="fc" id="L121">		String stock1 = this.stock.toString();</span>
+<span class="fc" id="L122">		return &quot;Vid-&quot;+this.vehicleId+&quot; Manu:&quot;+this.manufactureName+&quot; price:&quot;+price1+&quot; color:&quot;+this.color+&quot; stock:&quot;+stock1+&quot; branchid:&quot;+this.getbranchId().getbranchId().getUserId();</span>
 	}
 	
 	

@@ -34,22 +34,22 @@ import com.techwave.client.model.Vehicledb;
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/CustomerHomepage&quot;)
 	public String custPage(@SessionAttribute(&quot;logindb&quot;) Logindb L, Customerdb C, Model M) {
-<span class="nc bnc" id="L37" title="All 2 branches missed.">		if(cCustomer.getByCustId(L.getUserId())!=null) {</span>
-<span class="nc" id="L38">			M.addAttribute(&quot;display&quot;, false);</span>
-<span class="nc" id="L39">			M.addAttribute(&quot;customerdb&quot;,cCustomer.getByCustId(L.getUserId()));</span>
-<span class="nc" id="L40">			return &quot;cHome&quot;;</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">		if(cCustomer.getByCustId(L.getUserId())!=null) {</span>
+<span class="fc" id="L38">			M.addAttribute(&quot;display&quot;, false);</span>
+<span class="fc" id="L39">			M.addAttribute(&quot;customerdb&quot;,cCustomer.getByCustId(L.getUserId()));</span>
+<span class="fc" id="L40">			return &quot;cHome&quot;;</span>
 		}
 		else {
-<span class="nc" id="L43">			M.addAttribute(&quot;display&quot;, true);</span>
-<span class="nc" id="L44">			M.addAttribute(&quot;customerdb&quot;, new Customerdb());</span>
-<span class="nc" id="L45">			return &quot;cHome&quot;;</span>
+<span class="fc" id="L43">			M.addAttribute(&quot;display&quot;, true);</span>
+<span class="fc" id="L44">			M.addAttribute(&quot;customerdb&quot;, new Customerdb());</span>
+<span class="fc" id="L45">			return &quot;cHome&quot;;</span>
 		}
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/CustomerHomepage/SaveInfo&quot;)
 	public String custSave(@SessionAttribute(&quot;logindb&quot;) Logindb L,@Valid @ModelAttribute(&quot;customerdb&quot;) Customerdb C, BindingResult bs, Model M) {
 		try {
-<span class="nc bnc" id="L52" title="All 2 branches missed.">			if(bs.hasErrors()) {</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">			if(bs.hasErrors()) {</span>
 <span class="nc" id="L53">				M.addAttribute(&quot;logindb&quot;, L);</span>
 <span class="nc" id="L54">				M.addAttribute(&quot;customerdb&quot;, new Customerdb());</span>
 <span class="nc" id="L55">				M.addAttribute(&quot;display&quot;, true);</span>
@@ -57,20 +57,20 @@ import com.techwave.client.model.Vehicledb;
 <span class="nc" id="L57">				return &quot;register&quot;;</span>
 			}
 			else {
-<span class="nc" id="L60">				C.setcustId(L);</span>
-<span class="nc" id="L61">				String msg = cCustomer.validateCustInfo(C);</span>
-<span class="nc bnc" id="L62" title="All 2 branches missed.">				if(msg.equals(&quot;Valid Credentials&quot;)) {</span>
-<span class="nc" id="L63">					cCustomer.AddCust(C);</span>
-<span class="nc" id="L64">					M.addAttribute(&quot;msg&quot;, msg);</span>
-<span class="nc" id="L65">					M.addAttribute(&quot;display&quot;, false);</span>
-<span class="nc" id="L66">					M.addAttribute(&quot;customerdb&quot;, C);</span>
-<span class="nc" id="L67">					return &quot;cHome&quot;;</span>
+<span class="fc" id="L60">				C.setcustId(L);</span>
+<span class="fc" id="L61">				String msg = cCustomer.validateCustInfo(C);</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">				if(msg.equals(&quot;Valid Credentials&quot;)) {</span>
+<span class="fc" id="L63">					cCustomer.AddCust(C);</span>
+<span class="fc" id="L64">					M.addAttribute(&quot;msg&quot;, msg);</span>
+<span class="fc" id="L65">					M.addAttribute(&quot;display&quot;, false);</span>
+<span class="fc" id="L66">					M.addAttribute(&quot;customerdb&quot;, C);</span>
+<span class="fc" id="L67">					return &quot;cHome&quot;;</span>
 				}
 				else {
-<span class="nc" id="L70">					M.addAttribute(&quot;display&quot;, true);</span>
-<span class="nc" id="L71">					M.addAttribute(&quot;msg&quot;, msg);</span>
-<span class="nc" id="L72">					M.addAttribute(&quot;customerdb&quot;, new Customerdb());</span>
-<span class="nc" id="L73">					return &quot;cHome&quot;;</span>
+<span class="fc" id="L70">					M.addAttribute(&quot;display&quot;, true);</span>
+<span class="fc" id="L71">					M.addAttribute(&quot;msg&quot;, msg);</span>
+<span class="fc" id="L72">					M.addAttribute(&quot;customerdb&quot;, new Customerdb());</span>
+<span class="fc" id="L73">					return &quot;cHome&quot;;</span>
 				}
 			}
 		}
@@ -85,108 +85,104 @@ import com.techwave.client.model.Vehicledb;
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/VehicleSearch&quot;)
 	public String vehicleSearch(Model M) {
-<span class="nc" id="L88">		List&lt;String&gt; branchIds = cCustomer.getAllBranchIds();</span>
-<span class="nc bnc" id="L89" title="All 2 branches missed.">		if(branchIds!=null) {</span>
-<span class="nc" id="L90">			M.addAttribute(&quot;branchIds&quot;, branchIds);</span>
+<span class="fc" id="L88">		List&lt;String&gt; branchIds = cCustomer.getAllBranchIds();</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">		if(branchIds!=null) {</span>
+<span class="fc" id="L90">			M.addAttribute(&quot;branchIds&quot;, branchIds);</span>
 		}
 		else {
-<span class="nc" id="L93">			M.addAttribute(&quot;branchIds&quot;, null);</span>
+<span class="fc" id="L93">			M.addAttribute(&quot;branchIds&quot;, new ArrayList&lt;String&gt;());</span>
 		}
-<span class="nc" id="L95">		M.addAttribute(&quot;vehicledb&quot;, new Vehicledb());</span>
-<span class="nc" id="L96">		M.addAttribute(&quot;vlist&quot;, null);</span>
-<span class="nc" id="L97">		return &quot;cVehSearch&quot;;</span>
+<span class="fc" id="L95">		M.addAttribute(&quot;vehicledb&quot;, new Vehicledb());</span>
+<span class="fc" id="L96">		M.addAttribute(&quot;vlist&quot;, new ArrayList&lt;Vehicledb&gt;());</span>
+<span class="fc" id="L97">		return &quot;cVehSearch&quot;;</span>
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/VehicleSearch/Display&quot;)
 	public String vehicleDisplay(@Valid @ModelAttribute(&quot;vehicledb&quot;) Vehicledb search, BindingResult bs, @RequestParam(&quot;price1&quot;) String price1, @RequestParam(&quot;price2&quot;) String price2, Model M) {
 		try {
-			
-<span class="nc bnc" id="L104" title="All 2 branches missed.">			if(bs.hasErrors()) {</span>
-<span class="nc" id="L105">				M.addAttribute(&quot;msg&quot;, bs.getAllErrors());</span>
-<span class="nc" id="L106">				return vehicleSearch(M);</span>
-			}
-<span class="nc bnc" id="L108" title="All 2 branches missed.">			else if (!bs.hasErrors()) {</span>
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">			if(bs.hasErrors()) {</span>
+<span class="nc" id="L104">				M.addAttribute(&quot;msg&quot;, bs.getAllErrors());</span>
+<span class="nc" id="L105">				return vehicleSearch(M);</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">			} else if (!bs.hasErrors()) {</span>
 				List&lt;Vehicledb&gt; vlist;
-<span class="nc bnc" id="L110" title="All 4 branches missed.">				if(price1==null || price2==null) {</span>
-<span class="nc" id="L111">					vlist = cCustomer.searchVehicles(search, null, null);</span>
+<span class="pc bpc" id="L108" title="1 of 4 branches missed.">				if(price1==&quot;&quot; || price2==&quot;&quot; || </span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">				Integer.parseInt(price1)&gt;Integer.parseInt(price2) </span>
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">				|| Integer.parseInt(price1) &lt; 0 </span>
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">				|| Integer.parseInt(price2) &lt; 0) {</span>
+<span class="fc" id="L112">					throw new NumberFormatException();</span>
+				} else {
+<span class="fc" id="L114">					int p1 = Integer.parseInt(price1);</span>
+<span class="fc" id="L115">					int p2 = Integer.parseInt(price2);</span>
+<span class="fc" id="L116">					vlist = cCustomer.searchVehicles(search, p1, p2);</span>
 				}
-				else {
-<span class="nc" id="L114">					int p1 = Integer.parseInt(price1);</span>
-<span class="nc" id="L115">					int p2 = Integer.parseInt(price2);</span>
-<span class="nc" id="L116">					vlist = cCustomer.searchVehicles(search, p1, p2);</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">				if(vlist!=null) {</span>
+<span class="fc" id="L119">					M.addAttribute(&quot;vlist&quot;, vlist);</span>
+				} else {
+<span class="fc" id="L121">					M.addAttribute(&quot;vlist&quot;, new ArrayList&lt;Vehicledb&gt;());</span>
 				}
-<span class="nc" id="L118">				List&lt;String&gt; branchIds = cCustomer.getAllBranchIds();</span>
-<span class="nc bnc" id="L119" title="All 2 branches missed.">				if(vlist!=null) {</span>
-<span class="nc" id="L120">					M.addAttribute(&quot;vlist&quot;, vlist);</span>
+<span class="fc" id="L123">				List&lt;String&gt; branchIds = cCustomer.getAllBranchIds();</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">				if(branchIds!=null) {</span>
+<span class="fc" id="L125">					M.addAttribute(&quot;branchIds&quot;, branchIds);</span>
+				} else {
+<span class="fc" id="L127">					M.addAttribute(&quot;branchIds&quot;, new ArrayList&lt;Branchdb&gt;());</span>
 				}
-				else {
-<span class="nc" id="L123">					M.addAttribute(&quot;vlist&quot;, null);</span>
-				}
-<span class="nc bnc" id="L125" title="All 2 branches missed.">				if(branchIds!=null) {</span>
-<span class="nc" id="L126">					M.addAttribute(&quot;branchIds&quot;, branchIds);</span>
-				}
-				else {
-<span class="nc" id="L129">					M.addAttribute(&quot;branchIds&quot;, null);</span>
-				}
-<span class="nc" id="L131">				M.addAttribute(&quot;vehicledb&quot;, search);</span>
-<span class="nc" id="L132">				M.addAttribute(&quot;price1&quot;, price1);</span>
-<span class="nc" id="L133">				M.addAttribute(&quot;price2&quot;, price2);</span>
-<span class="nc" id="L134">				System.out.println(&quot;no bs error&quot;);</span>
-<span class="nc" id="L135">				return &quot;cVehSearch&quot;;</span>
+<span class="fc" id="L129">				M.addAttribute(&quot;vehicledb&quot;, search);</span>
+<span class="fc" id="L130">				M.addAttribute(&quot;price1&quot;, price1);</span>
+<span class="fc" id="L131">				M.addAttribute(&quot;price2&quot;, price2);</span>
+<span class="fc" id="L132">				System.out.println(&quot;no bs error&quot;);</span>
+<span class="fc" id="L133">				return &quot;cVehSearch&quot;;</span>
+			} else {
+<span class="nc" id="L135">				throw new Exception();</span>
 			}
-			else {
-<span class="nc" id="L138">				throw new Exception();</span>
-			}
-		}
-<span class="nc" id="L141">		catch(Exception E) {</span>
-<span class="nc" id="L142">			M.addAttribute(&quot;msg&quot;, E.getMessage());</span>
-<span class="nc" id="L143">			return vehicleSearch(M);</span>
+<span class="fc" id="L137">		} catch(Exception E) {</span>
+<span class="fc" id="L138">			M.addAttribute(&quot;msg&quot;, &quot;Prices cannot be empty. Price 1 must be lower than Price 2. Both prices cannot be less than $0.&quot;);</span>
+<span class="fc" id="L139">			return vehicleSearch(M);</span>
 		}
 	}
 	
 	@RequestMapping(&quot;OnlineVehicleBookingSystem/VehicleSearch/Book&quot;)
 	public String vehicleBooked(@Valid @ModelAttribute(&quot;vehicledb&quot;) Vehicledb search, BindingResult bs, @ModelAttribute(&quot;logindb&quot;) Logindb L,  @RequestParam(&quot;vehicles[]&quot;) String[] vehicles ,Model M) {
 		try {
-<span class="nc bnc" id="L150" title="All 2 branches missed.">			if(bs.hasErrors()) {</span>
-<span class="nc" id="L151">				M.addAttribute(&quot;msg&quot;, &quot;BindingResult&quot;);</span>
-<span class="nc" id="L152">				System.out.println(&quot;bs error in book&quot;);</span>
-<span class="nc" id="L153">				return vehicleDisplay(search, bs, null, null, M);</span>
+<span class="pc bpc" id="L146" title="1 of 2 branches missed.">			if(bs.hasErrors()) {</span>
+<span class="nc" id="L147">				M.addAttribute(&quot;msg&quot;, &quot;BindingResult&quot;);</span>
+<span class="nc" id="L148">				System.out.println(&quot;bs error in book&quot;);</span>
+<span class="nc" id="L149">				return vehicleDisplay(search, bs, null, null, M);</span>
 			}
-<span class="nc bnc" id="L155" title="All 2 branches missed.">			else if (!bs.hasErrors()) {</span>
-<span class="nc" id="L156">				List&lt;Vehicledb&gt; vlist = new ArrayList&lt;Vehicledb&gt;();</span>
-<span class="nc bnc" id="L157" title="All 2 branches missed.">				for(String s : vehicles) {</span>
-<span class="nc" id="L158">					Vehicledb v = cCustomer.getByVehicleId(s);</span>
-<span class="nc" id="L159">					Random ran = new Random();</span>
-<span class="nc" id="L160">					int digit1 = ran.nextInt(0, 10);</span>
-<span class="nc" id="L161">					int digit2 = ran.nextInt(0, 10);</span>
-<span class="nc" id="L162">					int digit3 = ran.nextInt(0, 10);</span>
-<span class="nc" id="L163">					String bookingId = &quot;b&quot;+digit1+&quot;&quot;+digit2+&quot;&quot;+digit3;</span>
-<span class="nc" id="L164">					CustomerBooking cb = new CustomerBooking(bookingId,  cCustomer.getByCustId(L.getUserId()), v, v.getbranchId(), &quot;pending&quot;);</span>
-<span class="nc" id="L165">					cCustomer.AddBooking(cb);</span>
-<span class="nc" id="L166">					vlist.add(v);</span>
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">			else if (!bs.hasErrors()) {</span>
+<span class="fc" id="L152">				List&lt;Vehicledb&gt; vlist = new ArrayList&lt;Vehicledb&gt;();</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">				for(String s : vehicles) {</span>
+<span class="fc" id="L154">					Vehicledb v = cCustomer.getByVehicleId(s);</span>
+<span class="fc" id="L155">					Random ran = new Random();</span>
+<span class="fc" id="L156">					int digit1 = ran.nextInt(0, 10);</span>
+<span class="fc" id="L157">					int digit2 = ran.nextInt(0, 10);</span>
+<span class="fc" id="L158">					int digit3 = ran.nextInt(0, 10);</span>
+<span class="fc" id="L159">					String bookingId = &quot;b&quot;+digit1+&quot;&quot;+digit2+&quot;&quot;+digit3;</span>
+<span class="fc" id="L160">					CustomerBooking cb = new CustomerBooking(bookingId,  cCustomer.getByCustId(L.getUserId()), v, v.getbranchId(), &quot;pending&quot;);</span>
+<span class="fc" id="L161">					cCustomer.AddBooking(cb);</span>
+<span class="fc" id="L162">					vlist.add(v);</span>
 				}
-<span class="nc" id="L168">				List&lt;String&gt; branchIds = cCustomer.getAllBranchIds();</span>
-<span class="nc bnc" id="L169" title="All 2 branches missed.">				if(branchIds!=null) {</span>
-<span class="nc" id="L170">					M.addAttribute(&quot;branchIds&quot;, branchIds);</span>
+<span class="fc" id="L164">				List&lt;String&gt; branchIds = cCustomer.getAllBranchIds();</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">				if(branchIds!=null) {</span>
+<span class="fc" id="L166">					M.addAttribute(&quot;branchIds&quot;, branchIds);</span>
 				}
 				else {
-<span class="nc" id="L173">					M.addAttribute(&quot;branchIds&quot;, null);</span>
+<span class="fc" id="L169">					M.addAttribute(&quot;branchIds&quot;, null);</span>
 				}
-<span class="nc" id="L175">				M.addAttribute(&quot;vlist&quot;, vlist);</span>
-<span class="nc" id="L176">				M.addAttribute(&quot;vehicledb&quot;, search);</span>
-<span class="nc" id="L177">				M.addAttribute(&quot;msg2&quot;, &quot;Vehicles have been booked&quot;);</span>
-<span class="nc" id="L178">				System.out.println(&quot;no error in book&quot;);</span>
-<span class="nc" id="L179">				return &quot;cVehSearch&quot;;</span>
+<span class="fc" id="L171">				M.addAttribute(&quot;vlist&quot;, vlist);</span>
+<span class="fc" id="L172">				M.addAttribute(&quot;vehicledb&quot;, search);</span>
+<span class="fc" id="L173">				M.addAttribute(&quot;msg2&quot;, &quot;Vehicles have been booked&quot;);</span>
+				// System.out.println(&quot;no error in book&quot;);
+<span class="fc" id="L175">				return &quot;cVehSearch&quot;;</span>
 			}
 			else {
-<span class="nc" id="L182">				throw new Exception();</span>
+<span class="nc" id="L178">				throw new Exception();</span>
 			}
 		}
-<span class="nc" id="L185">		catch(Exception E) {		</span>
-<span class="nc" id="L186">			M.addAttribute(&quot;msg&quot;, &quot;Exception&quot;);</span>
-<span class="nc" id="L187">			System.out.println(&quot;exception error in book&quot;);</span>
-<span class="nc" id="L188">			System.out.println(E.getLocalizedMessage());</span>
-<span class="nc" id="L189">			return vehicleDisplay(search, bs, null, null, M);</span>
+<span class="fc" id="L181">		catch(Exception E) {		</span>
+<span class="fc" id="L182">			M.addAttribute(&quot;msg&quot;, &quot;Exception&quot;);</span>
+<span class="fc" id="L183">			System.out.println(&quot;exception error in book&quot;);</span>
+<span class="fc" id="L184">			System.out.println(E.getLocalizedMessage());</span>
+<span class="fc" id="L185">			return vehicleDisplay(search, bs, null, null, M);</span>
 		}
 	}
 	
@@ -194,19 +190,19 @@ import com.techwave.client.model.Vehicledb;
 	public String bookingPage(@SessionAttribute(&quot;logindb&quot;) Logindb L, Model M) {
 		try {
 			List&lt;CustomerBooking&gt; cbList;
-<span class="nc" id="L197">			cbList = cCustomer.getAllBookings().stream().filter(i-&gt;i.getCustId().getcustId().getUserId().equals(L.getUserId())).collect(Collectors.toList());</span>
-<span class="nc bnc" id="L198" title="All 2 branches missed.">			if(cbList!=null) {</span>
-<span class="nc" id="L199">				M.addAttribute(&quot;cbList&quot;, cbList);</span>
-<span class="nc" id="L200">				return &quot;cVehBook&quot;;</span>
+<span class="pc" id="L193">			cbList = cCustomer.getAllBookings().stream().filter(i-&gt;i.getCustId().getcustId().getUserId().equals(L.getUserId())).collect(Collectors.toList());</span>
+<span class="pc bpc" id="L194" title="1 of 2 branches missed.">			if(cbList!=null) {</span>
+<span class="fc" id="L195">				M.addAttribute(&quot;cbList&quot;, cbList);</span>
+<span class="fc" id="L196">				return &quot;cVehBook&quot;;</span>
 			}
 			else {
-<span class="nc" id="L203">				throw new Exception();</span>
+<span class="nc" id="L199">				throw new Exception();</span>
 			}
 		}
-<span class="nc" id="L206">		catch(Exception E) {</span>
-<span class="nc" id="L207">			M.addAttribute(&quot;cbList&quot;, null);</span>
-<span class="nc" id="L208">			M.addAttribute(&quot;msg&quot;, &quot;No bookings available.&quot;);</span>
-<span class="nc" id="L209">			return &quot;cVehBook&quot;;</span>
+<span class="fc" id="L202">		catch(Exception E) {</span>
+<span class="fc" id="L203">			M.addAttribute(&quot;cbList&quot;, null);</span>
+<span class="fc" id="L204">			M.addAttribute(&quot;msg&quot;, &quot;No bookings available.&quot;);</span>
+<span class="fc" id="L205">			return &quot;cVehBook&quot;;</span>
 		}
 	}
 }
