@@ -51,7 +51,7 @@ public class CustomerController {
 		try {
 			if(bs.hasErrors()) {
 				M.addAttribute("logindb", L);
-				M.addAttribute("customerdb", new Customerdb());
+				M.addAttribute("customerdb", C);
 				M.addAttribute("display", true);
 				M.addAttribute("msg", "Error in saving your info. Contact System Administrator");
 				return "register";
@@ -69,7 +69,7 @@ public class CustomerController {
 				else {
 					M.addAttribute("display", true);
 					M.addAttribute("msg", msg);
-					M.addAttribute("customerdb", new Customerdb());
+					M.addAttribute("customerdb", C);
 					return "cHome";
 				}
 			}
@@ -90,66 +90,67 @@ public class CustomerController {
 			M.addAttribute("branchIds", branchIds);
 		}
 		else {
-			M.addAttribute("branchIds", new ArrayList<String>());
+			M.addAttribute("branchIds", null);
 		}
 		M.addAttribute("vehicledb", new Vehicledb());
-		M.addAttribute("vlist", new ArrayList<Vehicledb>());
+		M.addAttribute("vlist", cCustomer.getAllVehicles());
 		return "cVehSearch";
 	}
 	
-	@RequestMapping("OnlineVehicleBookingSystem/VehicleSearch/Display")
-	public String vehicleDisplay(@Valid @ModelAttribute("vehicledb") Vehicledb search, BindingResult bs, @RequestParam("price1") String price1, @RequestParam("price2") String price2, Model M) {
-		try {
-			if(bs.hasErrors()) {
-				M.addAttribute("msg", bs.getAllErrors());
-				return vehicleSearch(M);
-			} else if (!bs.hasErrors()) {
-				List<Vehicledb> vlist;
-				if(price1=="" || price2=="" || 
-				Integer.parseInt(price1)>Integer.parseInt(price2) 
-				|| Integer.parseInt(price1) < 0 
-				|| Integer.parseInt(price2) < 0) {
-					throw new NumberFormatException();
-				} else {
-					int p1 = Integer.parseInt(price1);
-					int p2 = Integer.parseInt(price2);
-					vlist = cCustomer.searchVehicles(search, p1, p2);
-				}
-				if(vlist!=null) {
-					M.addAttribute("vlist", vlist);
-				} else {
-					M.addAttribute("vlist", new ArrayList<Vehicledb>());
-				}
-				List<String> branchIds = cCustomer.getAllBranchIds();
-				if(branchIds!=null) {
-					M.addAttribute("branchIds", branchIds);
-				} else {
-					M.addAttribute("branchIds", new ArrayList<Branchdb>());
-				}
-				M.addAttribute("vehicledb", search);
-				M.addAttribute("price1", price1);
-				M.addAttribute("price2", price2);
-				System.out.println("no bs error");
-				return "cVehSearch";
-			} else {
-				throw new Exception();
-			}
-		} catch(Exception E) {
-			M.addAttribute("msg", "Prices cannot be empty. Price 1 must be lower than Price 2. Both prices cannot be less than $0.");
-			return vehicleSearch(M);
-		}
-	}
+	// @RequestMapping("OnlineVehicleBookingSystem/VehicleSearch/Display")
+	// public String vehicleDisplay(@Valid @ModelAttribute("vehicledb") Vehicledb search, BindingResult bs, @RequestParam("price1") String price1, @RequestParam("price2") String price2, Model M) {
+	// 	try {
+	// 		if(bs.hasErrors()) {
+	// 			M.addAttribute("msg", bs.getAllErrors());
+	// 			return vehicleSearch(M);
+	// 		} else if (!bs.hasErrors()) {
+	// 			List<Vehicledb> vlist;
+	// 			if(price1.isEmpty() || price2.isEmpty() || 
+	// 			Integer.parseInt(price1)>Integer.parseInt(price2) 
+	// 			|| Integer.parseInt(price1) < 0 
+	// 			|| Integer.parseInt(price2) < 0) {
+	// 				throw new NumberFormatException();
+	// 			} else {
+	// 				int p1 = Integer.parseInt(price1);
+	// 				int p2 = Integer.parseInt(price2);
+	// 				System.out.println(p1 + " " + p2);
+	// 				System.out.println(search.toString());
+	// 				vlist = cCustomer.searchVehicles(search, p1, p2);
+	// 			}
+	// 			if(!vlist.isEmpty()) {
+	// 				M.addAttribute("vlist", vlist);
+	// 			} else {
+	// 				M.addAttribute("vlist",null);
+	// 			}
+	// 			// List<String> branchIds = cCustomer.getAllBranchIds();
+	// 			// if(branchIds!=null) {
+	// 			// 	M.addAttribute("branchIds", branchIds);
+	// 			// } else {
+	// 			// 	M.addAttribute("branchIds", new ArrayList<Branchdb>());
+	// 			// }
+	// 			M.addAttribute("vehicledb", search);
+	// 			M.addAttribute("price1", price1);
+	// 			M.addAttribute("price2", price2);
+	// 			System.out.println("no bs error");
+	// 			return "cVehSearch";
+	// 		} else {
+	// 			throw new Exception();
+	// 		}
+	// 	} catch(Exception E) {
+	// 		M.addAttribute("msg", "Prices cannot be empty. Price 1 must be lower than Price 2. Both prices cannot be less than $0.");
+	// 		return vehicleSearch(M);
+	// 	}
+	// }
 	
 	@RequestMapping("OnlineVehicleBookingSystem/VehicleSearch/Book")
-	public String vehicleBooked(@Valid @ModelAttribute("vehicledb") Vehicledb search, BindingResult bs, @ModelAttribute("logindb") Logindb L,  @RequestParam("vehicles[]") String[] vehicles ,Model M) {
+	public String vehicleBooked(@Valid @ModelAttribute("vehicledb") Vehicledb search, BindingResult bs, @ModelAttribute("logindb") Logindb L,  @RequestParam(value = "vehicles[]", required=false) String[] vehicles ,Model M) {
 		try {
 			if(bs.hasErrors()) {
 				M.addAttribute("msg", "BindingResult");
 				System.out.println("bs error in book");
-				return vehicleDisplay(search, bs, null, null, M);
+				return vehicleSearch(M);
 			}
 			else if (!bs.hasErrors()) {
-				List<Vehicledb> vlist = new ArrayList<Vehicledb>();
 				for(String s : vehicles) {
 					Vehicledb v = cCustomer.getByVehicleId(s);
 					Random ran = new Random();
@@ -159,7 +160,6 @@ public class CustomerController {
 					String bookingId = "b"+digit1+""+digit2+""+digit3;
 					CustomerBooking cb = new CustomerBooking(bookingId,  cCustomer.getByCustId(L.getUserId()), v, v.getbranchId(), "pending");
 					cCustomer.AddBooking(cb);
-					vlist.add(v);
 				}
 				List<String> branchIds = cCustomer.getAllBranchIds();
 				if(branchIds!=null) {
@@ -168,10 +168,9 @@ public class CustomerController {
 				else {
 					M.addAttribute("branchIds", null);
 				}
-				M.addAttribute("vlist", vlist);
+				M.addAttribute("vlist", cCustomer.getAllVehicles());
 				M.addAttribute("vehicledb", search);
 				M.addAttribute("msg2", "Vehicles have been booked");
-				// System.out.println("no error in book");
 				return "cVehSearch";
 			}
 			else {
@@ -182,7 +181,7 @@ public class CustomerController {
 			M.addAttribute("msg", "Exception");
 			System.out.println("exception error in book");
 			System.out.println(E.getLocalizedMessage());
-			return vehicleDisplay(search, bs, null, null, M);
+			return vehicleSearch(M);
 		}
 	}
 	

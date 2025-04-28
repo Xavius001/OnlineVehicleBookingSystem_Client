@@ -18,7 +18,7 @@
 					<td><f:input path="vehicleId"></f:input></td>
 					<td><f:errors path="vehicleId"></f:errors></td>	
 				</tr>
-				<tr>
+				<!-- <tr>
 					<td>Manufacturer Name</td>
 					<td><f:input path="manufactureName"></f:input></td>
 					<td><f:errors path="manufactureName"></f:errors></td>
@@ -42,12 +42,45 @@
 					<td>Branch Id</td>
 					<td><f:input path="branchId.branchId.userId"></f:input></td>
 					<td><f:errors path="branchId.branchId.userId"></f:errors></td>	
+				</tr> -->
+				<tr>
+					<td>Request Stock</td>
+					<td><f:input path="requestStock"></f:input></td>
+					<td><f:errors path="requestStock"></f:errors></td>	
 				</tr>
 				<tr>
 					<td><input type="submit" value="Request" ></td>
 				</tr>
 			</Table>
 			<a:out value="${msg}"></a:out>
+			<a:if test="${vlist!=null}">
+					<f:form modelAttribute="vlist">
+						<Table border="1">
+							<tr>
+								<td>Vehicle ID</td>
+								<td>Manufacturer Name</td>
+								<td>Price</td>
+								<td>Color</td>
+								<td>Stock</td>
+								<td>Branch Id</td>
+								<td>Status</td>
+								<td>Requested Stock</td>
+							</tr>
+							<a:forEach var="v" items="${vlist}">
+								<tr>
+									<td>${v.vehicleId}</td>
+									<td>${v.manufactureName}</td>
+									<td>${v.price}</td>
+									<td>${v.color}</td>
+									<td>${v.stock}</td>
+									<td>${v.branchId.branchId.userId}</td>
+									<td>${v.status}</td>
+									<td>${v.requestStock}</td>
+								</tr>
+							</a:forEach>
+						</Table>
+					</f:form>
+			</a:if>
 		</f:form>
 		
 		

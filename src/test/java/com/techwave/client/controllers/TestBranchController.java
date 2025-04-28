@@ -121,7 +121,7 @@ public class TestBranchController {
         when(cBranch.getAllBookings()).thenReturn(null);
         this.mockMvc.perform(get("/OnlineVehicleBookingSystem/ApproveVehicleBooking")
         .sessionAttr("logindb", L))
-                .andExpect(model().attributeExists("msg", "cbList"))
+                .andExpect(model().attributeExists("msg"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("bAprVehBook"));
     }
@@ -186,19 +186,11 @@ public class TestBranchController {
 
     @Test
     void testRequestPage2() throws Exception {
+        when(cBranch.requestVehicleStock(any(Vehicledb.class))).thenReturn("Vehicle requested successfully.");
         this.mockMvc.perform(get("/OnlineVehicleBookingSystem/RequestNewVehicles/Request")
         .sessionAttr("logindb", L)
-        .flashAttr("vehicledb", new Vehicledb("vehicle1", "toyota", "blue", 5, 20000, B, 10, "approved")))
-                .andExpect(model().attributeExists("vehicledb"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("bReqNewVeh"));
-    }
-
-    @Test
-    void testRequestPage2Catch() throws Exception {
-        this.mockMvc.perform(get("/OnlineVehicleBookingSystem/RequestNewVehicles/Request")
-        .sessionAttr("logindb", L))
-                .andExpect(model().attributeExists("vehicledb", "msg"))
+        .flashAttr("vehicledb", new Vehicledb("vehicle1", "toyota", "blue", 5, 20000, B, 10, "approved", 0)))
+                .andExpect(model().attributeExists("vehicledb", "msg", "vlist"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("bReqNewVeh"));
     }

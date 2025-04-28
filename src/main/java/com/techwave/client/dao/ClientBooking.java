@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import com.techwave.client.model.CustomerBooking;
@@ -40,15 +43,26 @@ public class ClientBooking extends ClientBranch implements IClientBooking {
 		// restTemplate.delete(url+"DeleteBooking/"+cb.getBookingId());
 		return "Booking option deleted";
 	}
+
 	@Override
 	public String ApproveBooking(CustomerBooking cb, String bookingId) {
-		// restTemplate.put(url+"ApproveBooking/"+bookingId, cb);
-		return "Approved";
+		ResponseEntity<String> response = restTemplate.exchange(
+			url + "ApproveBooking/"+bookingId,
+			HttpMethod.PUT,
+			new HttpEntity<>(cb),
+			String.class
+    	);
+    	return response.getBody();
 	}
 	
 	@Override
 	public String RejectBooking(CustomerBooking cb, String bookingId) {
-		// restTemplate.put(url+"RejectBooking/"+bookingId, cb);
-		return "Rejected";
+		ResponseEntity<String> response = restTemplate.exchange(
+			url + "RejectBooking/"+bookingId,
+			HttpMethod.PUT,
+			new HttpEntity<>(cb),
+			String.class
+    	);
+    	return response.getBody();
 	}
 }

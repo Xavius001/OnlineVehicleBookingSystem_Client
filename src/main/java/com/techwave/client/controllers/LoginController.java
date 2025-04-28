@@ -87,6 +87,10 @@ public class LoginController {
 				String role = cLogin.validateLogin(login);
 
 				String status = cLogin.getLoginStatus(login);
+
+				role = role.trim().toLowerCase();
+            	status = status.trim().toLowerCase();
+				
 				if(!role.equals("Invalid")) {
 					login.setRole(role);
 				}

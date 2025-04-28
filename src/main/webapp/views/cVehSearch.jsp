@@ -11,7 +11,7 @@
 	<jsp:attribute name="content">
 		
 
-			<f:form action="http://localhost:8080/OnlineVehicleBookingSystem/VehicleSearch/Display" modelAttribute="vehicledb">
+			<!-- <f:form action="http://localhost:8080/OnlineVehicleBookingSystem/VehicleSearch/Display" modelAttribute="vehicledb">
 					<Table>
 						<tr>
 							<td>Manufacturer Name</td>
@@ -51,7 +51,7 @@
 						</tr>
 					</Table>
 					<a:out value="${msg}"></a:out>
-				</f:form>
+				</f:form> -->
 				<a:if test="${vlist!=null}">
 					<f:form action="http://localhost:8080/OnlineVehicleBookingSystem/VehicleSearch/Book" modelAttribute="vlist">
 						<Table border="1">

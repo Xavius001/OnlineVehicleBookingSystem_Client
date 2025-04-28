@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.regex.Matcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -36,13 +37,11 @@ public class ClientVehicle implements IClientVehicle {
 	}
 	@Override
 	public String UpdateVehicle(Vehicledb v) {
-		// restTemplate.put(url+"UpdateVehicle/"+v.getVehicleId(), v);
-		// return "vehicle updated";
 		ResponseEntity<String> response = restTemplate.exchange(
-			url + "UpdateVehicle/" + v.getVehicleId(), // URL with vehicle ID
-			HttpMethod.PUT,                            // HTTP method
-			new HttpEntity<>(v),                       // Request body wrapped in HttpEntity
-			String.class                               // Expected response type
+			url + "UpdateVehicle/" + v.getVehicleId(),
+			HttpMethod.PUT,
+			new HttpEntity<>(v),
+			String.class
     	);
     	return response.getBody();
 	}
@@ -51,22 +50,66 @@ public class ClientVehicle implements IClientVehicle {
 		// restTemplate.delete(url+"DeleteVehicle/"+v.getVehicleId(), String.class);
 		// return "Vehicle deleted";
 		ResponseEntity<String> response = restTemplate.exchange(
-			url + "DeleteVehicle/" + v.getVehicleId(), // URL with vehicle ID
-			HttpMethod.DELETE,                            // HTTP method
-			new HttpEntity<>(v),                       // Request body wrapped in HttpEntity
-			String.class                               // Expected response type
+			url + "DeleteVehicle/" + v.getVehicleId(),
+			HttpMethod.DELETE, 
+			new HttpEntity<>(v),
+			String.class
     	);
     	return response.getBody();
 	}
 	@Override
-	public List<Vehicledb> searchVehicles(Vehicledb search, Integer price1, Integer price2) {
-		Vehicledb list[] = restTemplate.getForObject(url+"SearchVehicles/"+price1+"/"+price2, Vehicledb[].class);
-		return Arrays.asList(list);
+	public List<Vehicledb> searchVehicles(Vehicledb search, int price1, int price2) {
+		try {
+			
+			// vlist = getAllVehicles().stream().filter(i->
+				
+			// 	i.getManufactureName().equalsIgnoreCase(search.getManufactureName()) &&
+				
+			// 	(i.getPrice()>price1 && i.getPrice()<price2) && 
+				
+			// 	i.getColor().equalsIgnoreCase(search.getColor()) &&
+				
+			// 	i.getbranchId().getbranchId().getUserId().equalsIgnoreCase(search.getbranchId().getbranchId().getUserId()) &&
+				
+			// 	i.getStock()>0 ).collect(Collectors.toList()); 
+
+			List<Vehicledb> vlist = getAllVehicles();
+			
+			if (search.getManufactureName() != null && !search.getManufactureName().isBlank()) {
+				vlist = vlist.stream().filter(i -> i.getManufactureName().equalsIgnoreCase(search.getManufactureName())).collect(Collectors.toList());
+			}
+			
+			if (search.getColor() != null && !search.getColor().isBlank()) {
+				vlist = vlist.stream().filter(i -> i.getColor().equalsIgnoreCase(search.getColor())).collect(Collectors.toList());
+			}
+			
+			if (search.getbranchId().getbranchId().getUserId() != null 
+			&& !search.getbranchId().getbranchId().getUserId().isBlank()) {
+				vlist = vlist.stream().filter(i -> i.getbranchId().getbranchId().getUserId().equalsIgnoreCase(search.getbranchId().getbranchId().getUserId())).collect(Collectors.toList());
+			}
+
+			System.out.println("Default stock ");
+			vlist = vlist.stream().filter(i -> i.getStock() > 0 
+			&& i.getPrice() >= price1 
+			&& i.getPrice() <= price2
+			&& i.getSeatingCapacity()==search.getSeatingCapacity()).collect(Collectors.toList());
+			
+			if(vlist!=null) {
+				return vlist;
+			}
+			else {
+				throw new Exception();
+			}
+		}
+		catch (Exception E) {
+			return null;
+		}
 	}
 	
+	
 	@Override
-	public String requestVehicle(Vehicledb request) {
-		return restTemplate.postForObject(url+"RequestVehicle", request, String.class);
+	public String requestVehicleStock(Vehicledb request) {
+		return restTemplate.postForObject(url+"RequestVehicle/", request, String.class);
 	}
 	
 	@Override
@@ -76,27 +119,23 @@ public class ClientVehicle implements IClientVehicle {
 	}
 	
 	@Override
-	public String approveVehicle(Vehicledb request) {
-		// restTemplate.put(url+"ApproveVehicle", request, String.class);
-		// return "Vehicle approved";
+	public String approveVehicleRequest(Vehicledb request) {
 		ResponseEntity<String> response = restTemplate.exchange(
-			url + "ApproveVehicle/", // URL with vehicle ID
-			HttpMethod.PUT,                            // HTTP method
-			new HttpEntity<>(request),                       // Request body wrapped in HttpEntity
-			String.class                               // Expected response type
+			url + "ApproveVehicle/"+request.getVehicleId(),
+			HttpMethod.PUT,
+			new HttpEntity<>(null),
+			String.class
     	);
     	return response.getBody();
 	}
 	
 	@Override
-	public String rejectVehicle(Vehicledb request) {
-		// restTemplate.put(url+"RejectVehicle", request, String.class);
-		// return "Vehicle rejected";
+	public String rejectVehicleRequest(Vehicledb request) {
 		ResponseEntity<String> response = restTemplate.exchange(
-			url + "RejectVehicle/", // URL with vehicle ID
-			HttpMethod.PUT,                            // HTTP method
-			new HttpEntity<>(request),                       // Request body wrapped in HttpEntity
-			String.class                               // Expected response type
+			url + "RejectVehicle/"+request.getVehicleId(),
+			HttpMethod.PUT,
+			new HttpEntity<>(null),
+			String.class
     	);
     	return response.getBody();
 	}

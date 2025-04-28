@@ -118,19 +118,21 @@ public class AdminController {
 		try {
 			if(requests!=null) {
 				List<Vehicledb> vlist = cAdmin.displayRequests();
+				System.out.println("vlist: " + vlist.toString());
 				List<String> msg = new ArrayList<String>();
+				System.out.println("msg: " + msg.toString());
 				for(String s : requests) {
 					Vehicledb v = vlist.stream().filter(i->i.getVehicleId().equals(s)).collect(Collectors.toList()).get(0);
-					msg.add(cAdmin.approveVehicle(v));
+					System.out.println("v: " + v.toString());
+					msg.add(cAdmin.approveVehicleRequest(v));
+					System.out.println("msg: " + msg.toString());
 				}
 				M.addAttribute("msg", msg);
 				return approveRequestPage(M);
-			}
-			else {
+			} else {
 				throw new Exception();
 			}
-		}
-		catch (Exception E) {
+		} catch (Exception E) {
 			M.addAttribute("msg", "Nothing was checked.");
 			return approveRequestPage(M);
 		}
@@ -144,16 +146,14 @@ public class AdminController {
 				List<String> msg = new ArrayList<String>();
 				for(String s : requests) {
 					Vehicledb v = vlist.stream().filter(i->i.getVehicleId().equals(s)).collect(Collectors.toList()).get(0);
-					msg.add(cAdmin.rejectVehicle(v));
+					msg.add(cAdmin.rejectVehicleRequest(v));
 				}
 				M.addAttribute("msglist", msg);
 				return approveRequestPage(M);
-			}
-			else {
+			} else {
 				throw new Exception();
 			}
-		}
-		catch (Exception E) {
+		} catch (Exception E) {
 			M.addAttribute("msg", "Nothing was checked.");
 			return approveRequestPage(M);
 		}
@@ -161,41 +161,37 @@ public class AdminController {
 	
 	@RequestMapping("OnlineVehicleBookingSystem/AddNewVehicle")
 	public String addNewVehicle(@ModelAttribute("vehicledb") Vehicledb V, BindingResult bs, Model M) {
-			try {
-				if(bs.hasErrors()) return "aAddNewVeh";
-				else if (!bs.hasErrors()) return "aAddNewVeh";
-				else throw new Exception();
-			}
-			catch (Exception E) {
-				return "aAddNewVeh";
-			}
+		try {
+			if(bs.hasErrors()) return "aAddNewVeh";
+			else if (!bs.hasErrors()) return "aAddNewVeh";
+			else throw new Exception();
+		} catch (Exception E) {
+			return "aAddNewVeh";
+		}
 	}
 	
 	
 	@RequestMapping("OnlineVehicleBookingSystem/AddNewVehicle/Added")
 	public String addNewVehicle2(@Valid @ModelAttribute("vehicledb") Vehicledb V, BindingResult bs, Model M) {
-			try {
-				if(bs.hasErrors()) {
-					M.addAttribute("msg", bs.getAllErrors());
-					return "aAddNewVeh";
-				}
-				else if (!bs.hasErrors()) {
-					Vehicledb old = cAdmin.getByVehicleId(V.getVehicleId());
-					if(old==null) {
-						Branchdb B = cAdmin.getByBranchId(V.getbranchId().getbranchId().getUserId());
-						V.setbranchId(B);
-						cAdmin.AddVehicle(V);
-						M.addAttribute("msg", "Vehicle added successfully");
-					}
-					else M.addAttribute("msg", "A vehicle with this ID already exists. Try again.");
-					return "aAddNewVeh";
-				}
-				else throw new Exception();
-			}
-			catch (Exception E) {
-				M.addAttribute("msg", E.getLocalizedMessage());
+		try {
+			if(bs.hasErrors()) {
+				M.addAttribute("msg", bs.getAllErrors());
 				return "aAddNewVeh";
-			}
+			} else if (!bs.hasErrors()) {
+				Vehicledb old = cAdmin.getByVehicleId(V.getVehicleId());
+				if(old==null) {
+					Branchdb B = cAdmin.getByBranchId(V.getbranchId().getbranchId().getUserId());
+					V.setbranchId(B);
+					cAdmin.AddVehicle(V);
+					M.addAttribute("msg", "Vehicle added successfully");
+				}
+				else M.addAttribute("msg", "A vehicle with this ID already exists. Try again.");
+				return "aAddNewVeh";
+			} else throw new Exception();
+		} catch (Exception E) {
+			M.addAttribute("msg", E.getLocalizedMessage());
+			return "aAddNewVeh";
+		}
 	}
 }
 

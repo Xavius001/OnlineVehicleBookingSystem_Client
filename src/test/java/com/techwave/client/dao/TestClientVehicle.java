@@ -123,7 +123,7 @@ public class TestClientVehicle {
     @Test
     void testRequestVehicle() {
         when(restTemplate.postForObject(clientVehicle.url+"RequestVehicle", V, String.class)).thenReturn("Vehicle Requested.");
-        assertEquals("Vehicle Requested.", clientVehicle.requestVehicle(V));
+        assertEquals("Vehicle Requested.", clientVehicle.requestVehicleStock(V));
     }
 
     @Test
@@ -140,7 +140,7 @@ public class TestClientVehicle {
             new HttpEntity<>(V),
             String.class
         )).thenReturn(ResponseEntity.ok("Vehicle Approved."));
-        assertEquals("Vehicle Approved.", clientVehicle.approveVehicle(V));
+        assertEquals("Vehicle Approved.", clientVehicle.approveVehicleRequest(V));
     }
 
     @Test
@@ -151,7 +151,7 @@ public class TestClientVehicle {
             new HttpEntity<>(V),
             String.class
         )).thenReturn(ResponseEntity.ok("Vehicle Rejected."));
-        assertEquals("Vehicle Rejected.", clientVehicle.rejectVehicle(V));
+        assertEquals("Vehicle Rejected.", clientVehicle.rejectVehicleRequest(V));
     }
 
 }

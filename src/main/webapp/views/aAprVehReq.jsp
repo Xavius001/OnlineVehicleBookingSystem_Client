@@ -20,6 +20,8 @@
 								<td>Color</td>
 								<td>Stock</td>
 								<td>Branch Id</td>
+								<td>Status</td>
+								<td>Request Stock</td>
 							</tr>
 							<a:forEach var="v" items="${vlist}">
 								<tr>
@@ -30,6 +32,8 @@
 									<td>${v.color}</td>
 									<td>${v.stock}</td>
 									<td>${v.branchId.branchId.userId}</td>
+									<td>${v.status}</td>
+									<td>${v.requestStock}</td>
 								</tr>
 							</a:forEach>
 						</Table>

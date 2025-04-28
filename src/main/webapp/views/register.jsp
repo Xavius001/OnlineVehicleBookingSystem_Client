@@ -27,6 +27,7 @@
 						<f:select id="Roles" path="role">
 							<f:option name="customer" value="customer">Customer</f:option>
 							<f:option name="branch" value="branch">Branch Admin</f:option>
+							<f:option name="admin" value="admin">Admin</f:option>
 						</f:select>
 					</td>
 				</tr>

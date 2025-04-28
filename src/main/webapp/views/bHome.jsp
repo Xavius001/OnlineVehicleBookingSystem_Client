@@ -28,11 +28,11 @@
 						<td><f:input path="address" type="address"></f:input></td>
 						<td><f:errors path="address" type="address"></f:errors></td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td>Email</td>
 						<td><f:input path="email"></f:input></td>
 						<td><f:errors path="email"></f:errors></td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td>Phone Number</td>
 						<td><f:input path="pno"></f:input></td>
@@ -63,11 +63,11 @@
 						<td><f:input path="address" type="address" value="${branchdb.address}" readonly="true"></f:input></td>
 						<td><f:errors path="address" type="address"></f:errors></td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<td>Email</td>
 						<td><f:input path="email" value="${branchdb.email}" readonly="true"></f:input></td>
 						<td><f:errors path="email"></f:errors></td>
-					</tr>
+					</tr> -->
 					<tr>
 						<td>Phone Number</td>
 						<td><f:input path="pno" value="${branchdb.pno}" readonly="true"></f:input></td>

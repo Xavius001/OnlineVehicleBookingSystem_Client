@@ -49,7 +49,7 @@ public class ClientCustomer extends ClientLogin implements IClientCustomer {
 	
 	@Override
 	public String validateCustInfo(Customerdb info) {
-		return restTemplate.postForObject(url+"validateCustInfo", info, String.class);
+		return restTemplate.postForObject(url+"ValidateCustInfo", info, String.class);
 	}
 	
 }

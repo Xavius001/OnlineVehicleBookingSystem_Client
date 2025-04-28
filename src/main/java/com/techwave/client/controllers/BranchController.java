@@ -48,7 +48,7 @@ public class BranchController {
 		try {
 			if(bs.hasErrors()) {
 				M.addAttribute("logindb", L);
-				M.addAttribute("branchdb", new Branchdb());
+				M.addAttribute("branchdb", B);
 				M.addAttribute("display", true);
 				M.addAttribute("msg", "Error in saving your info. Contact System Administrator");
 				return "register";
@@ -66,7 +66,7 @@ public class BranchController {
 				else {
 					M.addAttribute("display", true);
 					M.addAttribute("msg", msg);
-					M.addAttribute("branchdb", new Branchdb());
+					M.addAttribute("branchdb", B);
 					return "bHome";
 				}
 			}
@@ -84,17 +84,23 @@ public class BranchController {
 	public String approvePage(@SessionAttribute("logindb") Logindb L, Model M) {
 		try {
 			List<CustomerBooking> cbList;
-			cbList = cBranch.getAllBookings().stream().filter(i->i.getBranchId().getbranchId().getUserId().equals(L.getUserId())).collect(Collectors.toList());
+			cbList = cBranch.getAllBookings().stream()
+    		.filter(i -> i.getBranchId() != null 
+              && i.getBranchId().getbranchId() != null 
+              && i.getBranchId().getbranchId().getUserId() != null 
+              && i.getBranchId().getbranchId().getUserId().equals(L.getUserId()))
+    		.collect(Collectors.toList());
+			System.out.println("cbList: "+cbList.toString());
 			if(cbList!=null) {
 				M.addAttribute("cbList", cbList);
 				return "bAprVehBook";
-			}
-			else {
+			} else {
+				System.out.println("Exception thrown.");
 				throw new Exception();
 			}
 		}
 		catch(Exception E) {
-			M.addAttribute("cbList", new ArrayList<CustomerBooking>());
+			M.addAttribute("cbList", null);
 			M.addAttribute("msg", "No bookings available.");
 			return "bAprVehBook";
 		}
@@ -147,6 +153,7 @@ public class BranchController {
 	@RequestMapping("OnlineVehicleBookingSystem/RequestNewVehicles")
 	public String requestPage(@ModelAttribute("vehicledb") Vehicledb request, Model M) {
 		M.addAttribute("vehicledb", new Vehicledb());
+		M.addAttribute("vlist", cBranch.getAllVehicles());
 		return "bReqNewVeh";
 	}
 	
@@ -159,15 +166,18 @@ public class BranchController {
 			}
 			else {
 				// System.out.println(request);
-				if( (request.getVehicleId().isBlank() || request.getVehicleId().isEmpty())
-						|| (request.getManufactureName().isBlank() || request.getManufactureName().isEmpty()) 
-						|| request.getPrice()==null || (request.getColor().isBlank() || request.getColor().isEmpty()) 
-						|| request.getStock()==null 
-						|| (request.getbranchId().getbranchId().getUserId().isBlank() || request.getbranchId().getbranchId().getUserId().isEmpty()) ) {
-					throw new Exception();
-				}
-				M.addAttribute("msg", cBranch.requestVehicle(request));
+				// if( (request.getVehicleId().isBlank() || request.getVehicleId().isEmpty())
+				// 		|| (request.getManufactureName().isBlank() || request.getManufactureName().isEmpty()) 
+				// 		|| request.getPrice()==null || (request.getColor().isBlank() || request.getColor().isEmpty()) 
+				// 		|| request.getStock()==null 
+				// 		|| (request.getbranchId().getbranchId().getUserId().isBlank() || request.getbranchId().getbranchId().getUserId().isEmpty()) ) {
+				// 	throw new Exception();
+				// }
+				System.out.println("Before vehicle request");
+				M.addAttribute("msg", cBranch.requestVehicleStock(request));
+				System.out.println("After vehicle request");
 				M.addAttribute("vehicledb", request);
+				M.addAttribute("vlist", cBranch.getAllVehicles());
 				return "bReqNewVeh";
 			}
 		}

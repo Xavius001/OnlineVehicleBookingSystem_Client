@@ -17,13 +17,13 @@ public interface IClientVehicle {
 	
 	String DeleteVehicle(Vehicledb v); //delete
 	
-	List<Vehicledb> searchVehicles(Vehicledb search, Integer price1, Integer price2);
+	List<Vehicledb> searchVehicles(Vehicledb search, int price1, int price2);
 	
-	String requestVehicle(Vehicledb request);
+	String requestVehicleStock(Vehicledb request);
 	
 	List<Vehicledb> displayRequests();
 	
-	String approveVehicle(Vehicledb request);
+	String approveVehicleRequest(Vehicledb request);
 
-	String rejectVehicle(Vehicledb request);
+	String rejectVehicleRequest(Vehicledb request);
 }

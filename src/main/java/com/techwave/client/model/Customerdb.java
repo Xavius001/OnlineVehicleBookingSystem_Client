@@ -14,6 +14,16 @@ public class Customerdb {
 	private String pno;
 	private String occupation;
 
+	private String email;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Logindb getcustId() {
 		return custId;
 	}

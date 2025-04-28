@@ -107,9 +107,10 @@ public class ClientLogin extends ClientVehicle implements IClientLogin {
 
 	@Override
 	public String validateLogin(Logindb L) {
-		return restTemplate.getForObject(url+"ValidateLogin/"+L.getUserId(), String.class);	
+		return restTemplate.getForObject(url+"ValidateLogin/"+L.getUserId()+"/"+L.getPassword(), String.class);	
 	}
 	
+	@Override
 	public String getLoginStatus(Logindb L) {
 		return restTemplate.getForObject(url+"GetLoginStatus/"+L.getUserId(), String.class);
 	}

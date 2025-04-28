@@ -18,6 +18,8 @@ public class Vehicledb {
 	private Integer stock;
 
 	private String status;
+
+	private Integer requestedStock;
 	
 	public String getVehicleId() {
 		return vehicleId;
@@ -83,6 +85,14 @@ public class Vehicledb {
 		this.status = status;
 	}
 
+	public Integer getRequestStock() {
+		return requestedStock;
+	}
+
+	public void setRequestStock(Integer requestedStock) {
+		this.requestedStock = requestedStock;
+	}
+
 	public Vehicledb(
 	String vehicleId, 
 	String manufactureName, 
@@ -91,7 +101,8 @@ public class Vehicledb {
 	Integer price, 
 	Branchdb branchId,
 	Integer stock, 
-	String status) {
+	String status,
+	Integer requestedStock) {
 		super();
 		this.vehicleId = vehicleId;
 		this.manufactureName = manufactureName;
@@ -101,6 +112,7 @@ public class Vehicledb {
 		this.branchId = branchId;
 		this.stock = stock;
 		this.status = status;
+		this.requestedStock = requestedStock;
 	}
 
 	public Vehicledb() {
@@ -113,7 +125,9 @@ public class Vehicledb {
 		this.branchId = new Branchdb();
 		this.stock = -1;
 		this.status = "";
+		this.requestedStock = 0;
 	}
+
 
 	@Override
 	public String toString() {

@@ -35,7 +35,7 @@ public class ClientBranch extends ClientCustomer implements IClientBranch {
 	
 	@Override
 	public String validateBranchInfo(Branchdb info) {
-		return restTemplate.postForObject(url+"validateBranchInfo", info, String.class);
+		return restTemplate.postForObject(url+"ValidateBranchInfo", info, String.class);
 	}
 
 	@Override
